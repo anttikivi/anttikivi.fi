@@ -2,9 +2,6 @@ name: Main workflow
 
 on: [push, pull_request]
 
-env:
-  GSAP_NPM_TOKEN: ${{ secrets.GSAP_NPM_TOKEN }}
-
 jobs:
   build:
     name: Build
