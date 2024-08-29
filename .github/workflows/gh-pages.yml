@@ -23,6 +23,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
+      GSAP_NPM_TOKEN: ${{ secrets.GSAP_NPM_TOKEN }}
       HUGO_VERSION: 0.128.0
     steps:
       - name: Install Hugo CLI
