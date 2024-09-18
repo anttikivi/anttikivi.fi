@@ -1,10 +1,12 @@
 {
   "name": "@anttikivi/website",
   "version": "0.0.0",
+  "private": true,
   "description": "Antti Kivi's website",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "eleventy",
+    "dev": "eleventy --serve"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/anttikivi/anttikivi.github.io/issues"
   },
-  "homepage": "https://github.com/anttikivi/anttikivi.github.io#readme"
+  "homepage": "https://github.com/anttikivi/anttikivi.github.io#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0-beta.1"
+  }
 }
