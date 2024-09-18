@@ -3,22 +3,27 @@
   "version": "0.0.0",
   "private": true,
   "description": "Antti Kivi's website",
-  "type": "module",
-  "scripts": {
-    "build": "eleventy",
-    "dev": "eleventy --serve"
+  "homepage": "https://github.com/anttikivi/anttikivi.github.io#readme",
+  "bugs": {
+    "url": "https://github.com/anttikivi/anttikivi.github.io/issues"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/anttikivi/anttikivi.github.io.git"
   },
-  "author": "Antti Kivi <antti@anttikivi.fi> (https://www.anttikivi.fi)",
   "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/anttikivi/anttikivi.github.io/issues"
+  "author": "Antti Kivi <antti@anttikivi.fi> (https://www.anttikivi.fi)",
+  "type": "module",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve",
+    "format": "prettier --write \"**/*.{html,js?(on),md}\""
   },
-  "homepage": "https://github.com/anttikivi/anttikivi.github.io#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0-beta.1"
+    "@11ty/eleventy": "^3.0.0-beta.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-organize-imports": "^4.0.0",
+    "prettier-plugin-packagejson": "^2.5.2",
+    "prettier-plugin-tailwindcss": "^0.6.6"
   }
 }
