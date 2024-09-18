@@ -1,8 +1,0 @@
-{
-  "buildCommand": "hugo --gc --minify",
-  "framework": "hugo",
-  "outputDirectory": "public",
-  "installCommand": "npm ci",
-  "regions": ["arn1"],
-  "trailingSlash": true
-}

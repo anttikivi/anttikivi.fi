@@ -1,9 +1,0 @@
-githubLogoAlt = "Githubin logo"
-instagramLogoAlt = "Instagramin logo"
-logoAlt = "Kirjaimet A ja K hymyilevien kasvojen silminä."
-mainID = "sisalto"
-skipToContent = "Siirry sisältöön"
-threadsLogoAlt = "Instagram Threadsin logo"
-
-[languageMenuLabel]
-  other = "Sivuston kieli on tällä hetkellä {{ .Language.LanguageName }}. Valitse, mitä kieltä haluat käyttää."

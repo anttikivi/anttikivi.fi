@@ -1,5 +1,0 @@
-baseURL = "https://www.anttikivi.fi"
-enableMissingTranslationPlaceholders = false
-
-[minify]
-  minifyOutput = true

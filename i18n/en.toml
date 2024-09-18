@@ -1,9 +1,0 @@
-githubLogoAlt = "GitHub logo"
-instagramLogoAlt = "Instagram logo"
-logoAlt = "The letters A and K as eyes of a smiling face."
-mainID = "main"
-skipToContent = "Skip to content"
-threadsLogoAlt = "Instagram Threads logo"
-
-[languageMenuLabel]
-  other = "The current language is {{ .Language.LanguageName }}. Choose your preferred language."
