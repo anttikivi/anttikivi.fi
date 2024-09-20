@@ -9,10 +9,8 @@ export default function (eleventyConfig) {
   eleventyConfig.addTemplateFormats("css");
   eleventyConfig.addExtension("css", {
     outputFileExtension: "css",
-    compile: (inputContent) => {
-      return async () =>
-        (await postcss([tailwindcss, autoprefixer]).process(inputContent)).css;
-    },
+    compile: (inputContent) => async () =>
+      (await postcss([tailwindcss, autoprefixer]).process(inputContent)).css,
   });
 
   return {
