@@ -1,5 +1,7 @@
 import { EleventyI18nPlugin } from "@11ty/eleventy";
 import autoprefixer from "autoprefixer";
+import cssnano from "cssnano";
+import htmlmin from "html-minifier-terser";
 import postcss from "postcss";
 import tailwindcss from "tailwindcss";
 
@@ -16,6 +18,21 @@ export default function (eleventyConfig) {
     defaultLanguage: "fi",
   });
 
+  eleventyConfig.addTransform("htmlmin", function (content) {
+    if (
+      process.env.NODE_ENV === "production" &&
+      (this.page.outputPath || "").endsWith(".html")
+    ) {
+      let minified = htmlmin.minify(content, {
+        useShortDoctype: true,
+        removeComments: true,
+        collapseWhitespace: true,
+      });
+      return minified;
+    }
+    return content;
+  });
+
   eleventyConfig.addWatchTarget("./tailwind.config.js");
 
   eleventyConfig.addTemplateFormats("css");
@@ -24,7 +41,11 @@ export default function (eleventyConfig) {
     compile: function (contents, inputPath) {
       return async function () {
         return (
-          await postcss([tailwindcss, autoprefixer]).process(contents, {
+          await postcss([
+            tailwindcss,
+            autoprefixer,
+            ...(process.env.NODE_ENV === "production" ? [cssnano] : []),
+          ]).process(contents, {
             from: inputPath,
           })
         ).css;
