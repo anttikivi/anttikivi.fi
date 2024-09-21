@@ -16,14 +16,37 @@
       <meta name="description" content="{{ config.description }}" />
     {% endif %}
 
-    <link rel="alternate" hreflang="{{ lang }}" href="{{ page.url }}" />
+    <link href="{{ config.baseURL }}{{ page.url }}" rel="canonical" />
+
+    <link
+      rel="alternate"
+      hreflang="{{ lang }}"
+      href="{{ config.baseURL }}{{ page.url }}"
+    />
     {% for link in page.url | locale_links %}
       <link
         rel="alternate"
         hreflang="{{ link.lang }}"
-        href="https://www.anttikivi.fi{{ link.url }}"
+        href="{{ config.baseURL }}{{ link.url }}"
       />
     {% endfor %}
+    {% if lang === "fi" %}
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href="{{ config.baseURL }}{{ page.url }}"
+      />
+    {% else %}
+      {% for link in page.url | locale_links %}
+        {% if link.lang === "fi" %}
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href="{{ config.baseURL }}{{ link.url }}"
+          />
+        {% endif %}
+      {% endfor %}
+    {% endif %}
 
     <link href="/main.css" rel="stylesheet" />
 
