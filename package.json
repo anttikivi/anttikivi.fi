@@ -22,7 +22,10 @@
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0-alpha.20",
+    "@eslint/js": "^9.11.0",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.11.0",
+    "globals": "^15.9.0",
     "postcss": "^8.4.47",
     "prettier": "^3.3.3",
     "prettier-plugin-jinja-template": "^1.5.0",
