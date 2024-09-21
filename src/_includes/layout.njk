@@ -3,8 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    {% if isHome -%}
+      <title>{{ config.title }} - {{ config.subtitle }}</title>
+    {%- else -%}
+      <title>{{ title }} - {{ config.title }}</title>
+    {%- endif -%}
+
+    {% if description %}
+      <meta name="description" content="{{ description }}" />
+    {% else %}
+      <meta name="description" content="{{ config.description }}" />
+    {% endif %}
+
+    <link rel="alternate" hreflang="{{ lang }}" href="{{ page.url }}" />
+    {% for link in page.url | locale_links %}
+      <link
+        rel="alternate"
+        hreflang="{{ link.lang }}"
+        href="https://www.anttikivi.fi{{ link.url }}"
+      />
+    {% endfor %}
+
+    <link href="/main.css" rel="stylesheet" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body
+    class="bg-gray-100 font-sans text-gray-900 dark:bg-gray-900 dark:text-gray-100"
+  >
     {{ content | safe }}
   </body>
 </html>

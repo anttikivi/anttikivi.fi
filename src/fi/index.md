@@ -1,7 +1,8 @@
 ---
 isHome: true
 layout: layout.njk
-title: Home
+permalink: "/index.html"
+title: Etusivu
 ---
 
 # Heading
