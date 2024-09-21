@@ -3,6 +3,7 @@ const config = {
   plugins: [
     "prettier-plugin-packagejson",
     "prettier-plugin-organize-imports",
+    "prettier-plugin-jinja-template",
     "prettier-plugin-tailwindcss",
   ],
   arrowParens: "always",
@@ -14,6 +15,14 @@ const config = {
   trailingComma: "all",
   useTabs: false,
   proseWrap: "always",
+  overrides: [
+    {
+      files: ["*.njk"],
+      options: {
+        parser: "jinja-template",
+      },
+    },
+  ],
 };
 
 export default config;
