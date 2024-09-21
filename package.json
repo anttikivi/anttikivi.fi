@@ -15,8 +15,8 @@
   "author": "Antti Kivi <antti@anttikivi.fi> (https://www.anttikivi.fi)",
   "type": "module",
   "scripts": {
-    "build": "eleventy",
-    "dev": "eleventy --serve",
+    "build": "NODE_ENV=$([ \"$(git rev-parse --abbrev-ref HEAD)\" = \"main\" ] && echo \"production\" || echo \"staging\") eleventy",
+    "dev": "NODE_ENV=development eleventy --serve",
     "format": "prettier --write \"**/*.{html,js?(on),md,njk}\"",
     "lint": "eslint ."
   },

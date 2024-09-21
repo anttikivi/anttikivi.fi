@@ -10,6 +10,8 @@ function basename(path) {
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
+  console.log("The NODE_ENV is set to", process.env.NODE_ENV);
+
   eleventyConfig.addPlugin(EleventyI18nPlugin, {
     defaultLanguage: "fi",
   });
