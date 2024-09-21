@@ -33,6 +33,8 @@ export default function (eleventyConfig) {
     return content;
   });
 
+  eleventyConfig.addPassthroughCopy({ "src/assets": "/" });
+
   eleventyConfig.addWatchTarget("./tailwind.config.js");
 
   eleventyConfig.addTemplateFormats("css");
