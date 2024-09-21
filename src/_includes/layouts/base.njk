@@ -95,6 +95,20 @@
     <a class="sr-only focus:not-sr-only" href="#{{ t.mainID }}">
       {{- t.skipToContent -}}
     </a>
+    <header>
+      <div class="container flex items-center justify-between py-10">
+        <a
+          class="text-xl hover:underline focus:underline"
+          href="{%- if lang === "fi" -%}/{%- else -%}/{{ lang }}/{%- endif -%}"
+        >
+          {%- if isHome -%}
+            <h1>{{- config.title -}}</h1>
+          {%- else -%}
+            {{- config.title -}}
+          {%- endif -%}
+        </a>
+      </div>
+    </header>
     <main id="{{ t.mainID }}">{{ content | safe }}</main>
   </body>
 </html>
