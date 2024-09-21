@@ -1,4 +1,4 @@
-import EleventyI18nPlugin from "@11ty/eleventy";
+import { EleventyI18nPlugin } from "@11ty/eleventy";
 import autoprefixer from "autoprefixer";
 import postcss from "postcss";
 import tailwindcss from "tailwindcss";
@@ -15,10 +15,13 @@ export default function (eleventyConfig) {
     compile: (inputContent) => async () =>
       (await postcss([tailwindcss, autoprefixer]).process(inputContent)).css,
   });
-
-  return {
-    dir: {
-      input: "src",
-    },
-  };
 }
+
+export const config = {
+  dir: {
+    input: "src",
+  },
+  templateFormats: ["html", "njk", "md", "11ty.js"],
+  markdownTemplateEngine: "njk",
+  htmlTemplateEngine: "njk",
+};
