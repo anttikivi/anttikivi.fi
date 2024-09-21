@@ -1,5 +1,5 @@
 export default {
-  baseURL:
+  baseUrl:
     process.env.NODE_ENV === "production"
       ? "https://www.anttikivi.fi"
       : process.env.NODE_ENV === "staging"
