@@ -54,6 +54,26 @@
       {% endfor %}
     {% endif %}
 
+    {% if isHome -%}
+      <meta
+        property="og:title"
+        content="{{ config.title }} - {{ config.subtitle }}"
+      />
+    {%- else -%}
+      <meta property="og:title" content="{{ title }} - {{ config.title }}" />
+    {%- endif -%}
+
+    {% if description %}
+      <meta property="og:description" content="{{ description }}" />
+    {% else %}
+      <meta property="og:description" content="{{ config.description }}" />
+    {% endif %}
+    {# TODO: Add og:type #}
+    <meta property="og:url" content="{{ config.baseURL }}{{ page.url }}" />
+    <meta property="og:image" content="/opengraph-{{ lang }}.png" />
+    {# TODO: Add og:locale #}
+    <meta property="og:site_name" content="{{ config.title }}" />
+
     <link href="/main.css" rel="stylesheet" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
