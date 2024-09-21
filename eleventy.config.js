@@ -25,7 +25,6 @@ export const config = {
   dir: {
     input: "src",
   },
-  templateFormats: ["html", "njk", "md", "11ty.js"],
   markdownTemplateEngine: "njk",
   htmlTemplateEngine: "njk",
 };
