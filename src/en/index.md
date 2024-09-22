@@ -1,6 +1,7 @@
 ---
 isHome: true
 layout: layouts/simple.njk
+permalink: '{{ "/" | makePath("en") }}'
 title: Home
 ---
 

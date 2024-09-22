@@ -1,7 +1,7 @@
 ---
 isHome: true
 layout: layouts/simple.njk
-permalink: "/index.html"
+permalink: '{{ "/" | makePath("fi") }}'
 title: Etusivu
 ---
 

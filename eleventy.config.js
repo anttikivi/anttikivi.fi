@@ -4,11 +4,7 @@ import cssnano from "cssnano";
 import htmlmin from "html-minifier-terser";
 import postcss from "postcss";
 import tailwindcss from "tailwindcss";
-
-/** @param {string} path */
-function basename(path) {
-  return path.substring(path.lastIndexOf("/") + 1);
-}
+import paths from "./src/_data/paths.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
@@ -17,6 +13,13 @@ export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyI18nPlugin, {
     defaultLanguage: "fi",
   });
+
+  eleventyConfig.addFilter(
+    "makePath",
+    /** @param {string} value, @param {string} lang  */ function (value, lang) {
+      return `${paths[lang][value]}index.html`;
+    },
+  );
 
   eleventyConfig.addTransform("htmlmin", function (content) {
     if (
@@ -55,7 +58,7 @@ export default function (eleventyConfig) {
     },
     compileOptions: {
       permalink: function (_, inputPath) {
-        return basename(inputPath);
+        return inputPath.substring(inputPath.lastIndexOf("/") + 1);
       },
     },
   });
