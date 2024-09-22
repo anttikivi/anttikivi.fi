@@ -1,6 +1,5 @@
 ---
-isHome: true
-layout: layouts/simple.njk
+layout: layouts/home.njk
 permalink: '{{ "/" | makePath("fi") }}'
 title: Etusivu
 ---
