@@ -1,0 +1,37 @@
+---
+layout: layouts/base.njk
+permalink: /404.html
+title: 404 Not Found
+---
+
+<section
+  class="prose prose-lg container dark:prose-invert prose-a:font-normal hover:prose-a:text-green-700 hover:prose-a:no-underline focus:prose-a:text-green-700 focus:prose-a:no-underline hover:dark:prose-a:text-green-400 focus:dark:prose-a:text-green-400"
+>
+  <h1 class="not-prose my-6 text-center font-mono text-6xl font-bold">404</h1>
+  {% for locale in config.locales -%}
+    {% if not config.disabledLocales.includes(locale) -%}
+      <div lang="{{ locale }}">
+        <h2 class="not-prose my-10 text-center font-mono text-3xl font-bold">
+          {%- if locale === "fi" -%}
+            Ei löydy
+          {%- elif locale === "en" -%}
+            Not Found
+          {%- endif -%}
+        </h2>
+        {% if locale === "fi" -%}
+          <p>
+            Etsimääsi sivua ei löytynyt. Tämä voi johtua siitä, että sivu on
+            poistettu tai sen osoite on muuttunut. Voit palata
+            <a href="/">etusivulle</a>.
+          </p>
+        {% elif locale === "en" -%}
+          <p>
+            The page you are looking for could not be found. This could be
+            because the page has been removed or the address has changed. You
+            can return to the <a href="/en/">home page</a>.
+          </p>
+        {% endif -%}
+      </div>
+    {% endif -%}
+  {% endfor -%}
+</section>

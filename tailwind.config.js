@@ -5,7 +5,7 @@ import plugin from "tailwindcss/plugin";
 
 /** @type {import("tailwindcss").Config} */
 export default {
-  content: ["./src/**/*.{html,njk}"],
+  content: ["./src/**/*.{html,md,njk}"],
   corePlugins: {
     container: false,
   },

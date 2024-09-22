@@ -6,6 +6,8 @@ export default {
         ? "https://staging.anttikivi.fi"
         : "http://localhost:8080",
   description: "Viestintäasiantuntija, yrittäjä ja ylioppilas",
+  disabledLocales: [],
+  locales: ["en", "fi"],
   subtitle: "Viestinnän asiantuntija",
   title: "Antti Kivi",
 };
