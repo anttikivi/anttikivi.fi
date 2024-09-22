@@ -15,6 +15,14 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addFilter(
+    "tUrl",
+    /** @param {string} value */ function (value) {
+      console.log("This is the filter:", this.page.lang);
+      console.log("Translating a path:", paths[this.page.lang][value]);
+      return `${paths[this.page.lang][value]}`;
+    },
+  );
+  eleventyConfig.addFilter(
     "makePath",
     /** @param {string} value, @param {string} lang  */ function (value, lang) {
       return `${paths[lang][value]}index.html`;

@@ -99,7 +99,7 @@
       <div class="container flex items-center justify-between py-10">
         <a
           class="text-xl hover:underline focus:underline"
-          href="{%- if lang === "fi" -%}/{%- else -%}/{{ lang }}/{%- endif -%}"
+          href="{{ '/' | tUrl }}"
         >
           {%- if isHome -%}
             <h1>{{- config.title -}}</h1>
