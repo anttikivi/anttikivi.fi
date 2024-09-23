@@ -11,17 +11,11 @@ jobs:
       !startsWith(github.event.head_commit.message, 'docs')"
     strategy:
       matrix:
-        hugo: ["0.121.2", "0.128.0"]
         node: ["18", "20"]
 
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4.1.1
-
-      - name: Install Hugo
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${{ matrix.hugo }}/hugo_extended_${{ matrix.hugo }}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
       - name: Set up Node.js environment
         uses: actions/setup-node@v4.0.2
@@ -32,8 +26,8 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build the apps and packages
-        run: make build
+      - name: Build the site
+        run: npm run build build
 
   check:
     name: Check
@@ -43,17 +37,11 @@ jobs:
       !startsWith(github.event.head_commit.message, 'docs')"
     strategy:
       matrix:
-        hugo: ["0.121.2", "0.128.0"]
         node: ["18", "20"]
 
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4.1.1
-
-      - name: Install Hugo
-        run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${{ matrix.hugo }}/hugo_extended_${{ matrix.hugo }}_linux-amd64.deb \
-          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
       - name: Set up Node.js environment
         uses: actions/setup-node@v4.0.2
@@ -61,22 +49,8 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: "npm"
 
-      - name: Install Cargo dependencies
-        run: cargo install taplo-cli --locked
-
-      - name: Cache the Cargo dependencies
-        uses: actions/cache@v4.0.0
-        with:
-          path: |
-            ~/.cargo/bin/
-            ~/.cargo/registry/index/
-            ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            target/
-          key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
-
       - name: Install dependencies
         run: npm ci
 
-      - name: Lint the workspaces
-        run: make lint
+      - name: Lint the project
+        run: npm run lint
