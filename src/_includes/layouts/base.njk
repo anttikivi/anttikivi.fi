@@ -110,5 +110,45 @@
       </div>
     </header>
     <main id="{{ t.mainID }}">{{ content | safe }}</main>
+    <footer>
+      <div class="container">
+        {% if page.fileSlug !== "404" -%}
+          <ul
+            class="my-12 flex flex-col items-center md:my-8"
+            role="menu"
+            aria-label="{{- t.footer.languageMenuLabel -}}"
+          >
+            {% for link in page.url | locale_links %}
+              {% if not config.disabledLocales.includes(locale) -%}
+                <li lang="{{- link.lang -}}" role="menuitem">
+                  <a
+                    class="text-green-950 dark:text-green-100 underline hover:text-green-700 hover:no-underline focus:text-green-700 focus:no-underline hover:dark:text-green-400 focus:dark:text-green-400"
+                    href="{{- link.url -}}"
+                  >
+                    {{- link.lang -}}
+                  </a>
+                </li>
+              {% endif -%}
+            {% endfor -%}
+          </ul>
+        {% endif -%}
+        <div
+          class="flex flex-col-reverse items-center justify-between py-10 sm:flex-row"
+        >
+          <div
+            class="my-12 flex flex-col items-center justify-start gap-4 sm:flex-row sm:gap-2 md:my-0"
+          >
+            <a
+              class="logo text-gray-900 hover:text-green-700 focus:text-green-700 dark:text-gray-100 hover:dark:text-green-400 focus:dark:text-green-400"
+              href="{{ '/' | tUrl }}"
+            >
+              LOGO
+            </a>
+            <span>© 2024 Antti Kivi</span>
+          </div>
+          <div></div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

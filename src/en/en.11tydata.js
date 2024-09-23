@@ -7,6 +7,9 @@ export default {
   dir: "ltr",
   lang: "en",
   t: {
+    footer: {
+      languageMenuLabel: "",
+    },
     mainID: "main",
     skipToContent: "Skip to main content",
   },
