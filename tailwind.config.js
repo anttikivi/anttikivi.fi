@@ -26,6 +26,10 @@ export default {
       },
       green: {
         /**
+         * Weak text colour for dark mode.
+         */
+        100: colors.emerald["100"],
+        /**
          * The colour for links on hover in dark mode.
          */
         400: colors.emerald["400"],
@@ -33,6 +37,10 @@ export default {
          * The colour for links on hover in light mode.
          */
         700: colors.emerald["700"],
+        /**
+         * Weak text colour for light mode.
+         */
+        950: colors.emerald["950"],
       },
     },
     container: {
