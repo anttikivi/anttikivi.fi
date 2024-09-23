@@ -8,10 +8,15 @@ export default {
   lang: "en",
   t: {
     footer: {
-      languageMenuLabel: "",
+      languageMenuLabel: "Site language",
     },
     logoAlt: "The letters A and K as eyes of a smiling face.",
     mainID: "main",
     skipToContent: "Skip to main content",
+    socialMedia: {
+      githubLogoAlt: "GitHub logo",
+      instagramLogoAlt: "Instagram logo",
+      threadsLogoAlt: "Instagram Threads logo",
+    },
   },
 };
