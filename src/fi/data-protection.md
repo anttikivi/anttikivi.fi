@@ -1,6 +1,6 @@
 ---
 layout: layouts/simple.njk
-permalink: '{{ "/data-protection/" | makePath("fi") }}'
+permalink: '{{ "data-protection" | makePath("fi") }}'
 title: Tietosuoja
 ---
 

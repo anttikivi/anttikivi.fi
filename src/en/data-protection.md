@@ -1,6 +1,6 @@
 ---
 layout: layouts/simple.njk
-permalink: '{{ "/data-protection/" | makePath("en") }}'
+permalink: '{{ "data-protection" | makePath("en") }}'
 title: Data protection
 ---
 

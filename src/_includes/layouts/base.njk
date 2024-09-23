@@ -197,6 +197,20 @@
                 {%- include "footer/github-logo.html" -%}
               </a>
             </div>
+            <nav
+              class="my-6 flex flex-col justify-center text-center sm:mb-0 sm:text-right"
+            >
+              {% for link in nav.terms -%}
+                <div class="my-2 sm:my-0">
+                  <a
+                    class="text-green-950 dark:text-green-100 hover:underline focus:underline"
+                    href="{{ link.link | tUrl }}"
+                  >
+                    {{- link.label[lang] -}}
+                  </a>
+                </div>
+              {% endfor -%}
+            </nav>
           </div>
         </div>
       </div>
