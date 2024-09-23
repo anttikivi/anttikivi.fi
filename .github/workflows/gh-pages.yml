@@ -35,6 +35,9 @@ jobs:
           "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci ||
           true"
 
+      - name: Build the site
+        run: npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3.0.1
         with:

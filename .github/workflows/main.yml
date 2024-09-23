@@ -27,7 +27,7 @@ jobs:
         run: npm ci
 
       - name: Build the site
-        run: npm run build build
+        run: npm run build
 
   check:
     name: Check
