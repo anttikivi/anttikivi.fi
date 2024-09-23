@@ -5,6 +5,7 @@ export default {
     footer: {
       languageMenuLabel: "",
     },
+    logoAlt: "Kirjaimet A ja K hymyilevien kasvojen silminä.",
     mainID: "sisalto",
     skipToContent: "Siirry sisältöön",
   },

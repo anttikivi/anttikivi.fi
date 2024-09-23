@@ -10,6 +10,7 @@ export default {
     footer: {
       languageMenuLabel: "",
     },
+    logoAlt: "The letters A and K as eyes of a smiling face.",
     mainID: "main",
     skipToContent: "Skip to main content",
   },

@@ -11,6 +11,7 @@ export default {
   },
   theme: {
     colors: {
+      current: "currentColor",
       gray: {
         /**
          * The background colour for the site in light mode and text colour for
