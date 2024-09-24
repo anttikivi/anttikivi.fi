@@ -5,15 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     {% if isHome -%}
-      <title>{{ config.title }} - {{ config.subtitle }}</title>
+      <title>{{ site.title }} - {{ site.subtitle }}</title>
     {%- else -%}
-      <title>{{ title }} - {{ config.title }}</title>
+      <title>{{ title }} - {{ site.title }}</title>
     {%- endif -%}
 
     {% if description %}
       <meta name="description" content="{{ description }}" />
     {% else %}
-      <meta name="description" content="{{ config.description }}" />
+      <meta name="description" content="{{ site.description }}" />
     {% endif %}
 
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
@@ -22,25 +22,25 @@
     <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
     <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
 
-    <link href="{{ config.baseUrl }}{{ page.url }}" rel="canonical" />
+    <link href="{{ site.baseUrl }}{{ page.url }}" rel="canonical" />
 
     <link
       rel="alternate"
       hreflang="{{ lang }}"
-      href="{{ config.baseUrl }}{{ page.url }}"
+      href="{{ site.baseUrl }}{{ page.url }}"
     />
     {% for link in page.url | locale_links %}
       <link
         rel="alternate"
         hreflang="{{ link.lang }}"
-        href="{{ config.baseUrl }}{{ link.url }}"
+        href="{{ site.baseUrl }}{{ link.url }}"
       />
     {% endfor %}
     {% if lang === "fi" %}
       <link
         rel="alternate"
         hreflang="x-default"
-        href="{{ config.baseUrl }}{{ page.url }}"
+        href="{{ site.baseUrl }}{{ page.url }}"
       />
     {% else %}
       {% for link in page.url | locale_links %}
@@ -48,7 +48,7 @@
           <link
             rel="alternate"
             hreflang="x-default"
-            href="{{ config.baseUrl }}{{ link.url }}"
+            href="{{ site.baseUrl }}{{ link.url }}"
           />
         {% endif %}
       {% endfor %}
@@ -57,22 +57,22 @@
     {% if isHome -%}
       <meta
         property="og:title"
-        content="{{ config.title }} - {{ config.subtitle }}"
+        content="{{ site.title }} - {{ site.subtitle }}"
       />
     {%- else -%}
-      <meta property="og:title" content="{{ title }} - {{ config.title }}" />
+      <meta property="og:title" content="{{ title }} - {{ site.title }}" />
     {%- endif -%}
 
     {% if description %}
       <meta property="og:description" content="{{ description }}" />
     {% else %}
-      <meta property="og:description" content="{{ config.description }}" />
+      <meta property="og:description" content="{{ site.description }}" />
     {% endif %}
     {# TODO: Add og:type #}
-    <meta property="og:url" content="{{ config.baseUrl }}{{ page.url }}" />
+    <meta property="og:url" content="{{ site.baseUrl }}{{ page.url }}" />
     <meta property="og:image" content="/opengraph-{{ lang }}.png" />
     {# TODO: Add og:locale #}
-    <meta property="og:site_name" content="{{ config.title }}" />
+    <meta property="og:site_name" content="{{ site.title }}" />
 
     <link href="/main.css" rel="stylesheet" />
 
@@ -102,9 +102,9 @@
           href="{{ '/' | tUrl }}"
         >
           {%- if isHome -%}
-            <h1>{{- config.title -}}</h1>
+            <h1>{{- site.title -}}</h1>
           {%- else -%}
-            {{- config.title -}}
+            {{- site.title -}}
           {%- endif -%}
         </a>
       </div>
@@ -119,7 +119,7 @@
             aria-label="{{- t.footer.languageMenuLabel -}}"
           >
             {% for link in page.url | locale_links %}
-              {% if not config.disabledLocales.includes(locale) -%}
+              {% if not site.disabledLocales.includes(locale) -%}
                 <li lang="{{- link.lang -}}" role="menuitem">
                   <a
                     class="text-green-950 underline hover:text-green-700 hover:no-underline focus:text-green-700 focus:no-underline dark:text-green-100 hover:dark:text-green-400 focus:dark:text-green-400"
@@ -170,7 +170,7 @@
             <div class="flex flex-row justify-center gap-6 sm:justify-end">
               <a
                 class="hover:text-green-700 focus:text-green-700 hover:dark:text-green-400 focus:dark:text-green-400"
-                href="{{- config.socialMedia.threadsUrl -}}"
+                href="{{- contact.socialMedia.threadsUrl -}}"
                 rel="nofollow"
               >
                 <span class="sr-only"
@@ -180,7 +180,7 @@
               </a>
               <a
                 class="hover:text-green-700 focus:text-green-700 hover:dark:text-green-400 focus:dark:text-green-400"
-                href="{{- config.socialMedia.instagramUrl -}}"
+                href="{{- contact.socialMedia.instagramUrl -}}"
                 rel="nofollow"
               >
                 <span class="sr-only"
@@ -190,7 +190,7 @@
               </a>
               <a
                 class="hover:text-green-700 focus:text-green-700 hover:dark:text-green-400 focus:dark:text-green-400"
-                href="{{- config.socialMedia.githubUrl -}}"
+                href="{{- site.socialMedia.githubUrl -}}"
                 rel="nofollow"
               >
                 <span class="sr-only">{{- t.socialMedia.githubLogoAlt -}}</span>

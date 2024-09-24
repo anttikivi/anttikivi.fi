@@ -1,11 +1,11 @@
 export default {
-  config: {
+  dir: "ltr",
+  lang: "en",
+  site: {
     description: "Communications adviser, entrepreneur, and student",
     subtitle: "Communications adviser",
     title: "Antti Kivi",
   },
-  dir: "ltr",
-  lang: "en",
   t: {
     footer: {
       languageMenuLabel: "Site language",

@@ -4,14 +4,14 @@ import cssnano from "cssnano";
 import htmlmin from "html-minifier-terser";
 import postcss from "postcss";
 import tailwindcss from "tailwindcss";
-import siteConfig from "./src/_data/config.js";
 import paths from "./src/_data/paths.js";
+import site from "./src/_data/site.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
   console.log("The NODE_ENV is set to", process.env.NODE_ENV);
 
-  for (const locale of siteConfig.disabledLocales) {
+  for (const locale of site.disabledLocales) {
     eleventyConfig.ignores.add(`src/${locale}/**/*`);
   }
 
