@@ -64,7 +64,7 @@ export default function (eleventyConfig) {
   });
 
   eleventyConfig.addPassthroughCopy({ "src/assets": "/" });
-  eleventyConfig.addPassthroughCopy({ "src/static": "/" });
+  eleventyConfig.addPassthroughCopy("src/robots.txt");
 
   eleventyConfig.addWatchTarget("./tailwind.config.js");
 
