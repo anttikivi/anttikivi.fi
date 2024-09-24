@@ -4,12 +4,6 @@ permalink: '{{ "data-protection" | makePath("fi") }}'
 title: Tietosuoja
 ---
 
-Tällä sivulla on esitetty tietoa siitä, millaisia tietosuojakäytäntöjä
-sovellamme [www.visiosto.fi](/)-sivustollamme sekä muussa toiminnassamme. Löydät
-tältä sivulta tietoa esimerkiksi evästeiden käyttämisestä sivustolla.
-
-## Sivustolla käytetyt evästeet
-
 Tämä sivusto ei käytä evästeitä eikä kerää vierailijoiden henkilötietoja.
 
 Sivusto käyttää [Plausible Analytics](https://plausible.io) -palvelua tilastojen
