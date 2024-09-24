@@ -1,4 +1,5 @@
 ---
+date: git Last Modified
 layout: layouts/simple.njk
 permalink: '{{ "data-protection" | makePath("fi") }}'
 title: Tietosuoja

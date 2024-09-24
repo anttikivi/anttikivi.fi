@@ -1,4 +1,5 @@
 ---
+date: git Last Modified
 layout: layouts/home.njk
 permalink: '{{ "/" | makePath("fi") }}'
 title: Etusivu
