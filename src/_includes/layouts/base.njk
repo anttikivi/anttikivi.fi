@@ -122,7 +122,7 @@
               {% if not config.disabledLocales.includes(locale) -%}
                 <li lang="{{- link.lang -}}" role="menuitem">
                   <a
-                    class="text-green-950 dark:text-green-100 underline hover:text-green-700 hover:no-underline focus:text-green-700 focus:no-underline hover:dark:text-green-400 focus:dark:text-green-400"
+                    class="text-green-950 underline hover:text-green-700 hover:no-underline focus:text-green-700 focus:no-underline dark:text-green-100 hover:dark:text-green-400 focus:dark:text-green-400"
                     href="{{- link.url -}}"
                   >
                     {{- nav.languages[link.lang] -}}
@@ -203,7 +203,7 @@
               {% for link in nav.terms -%}
                 <div class="my-2 sm:my-0">
                   <a
-                    class="text-green-950 dark:text-green-100 hover:underline focus:underline"
+                    class="text-green-950 hover:underline focus:underline dark:text-green-100"
                     href="{{ link.link | tUrl }}"
                   >
                     {{- link.label[lang] -}}
