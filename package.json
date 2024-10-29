@@ -21,7 +21,7 @@
     "lint": "eslint ."
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0-alpha.20",
+    "@11ty/eleventy": "^3.0.0",
     "@eslint/js": "^9.11.0",
     "@tailwindcss/typography": "^0.5.15",
     "autoprefixer": "^10.4.20",
