@@ -15,6 +15,7 @@ const config = {
   trailingComma: "all",
   useTabs: false,
   proseWrap: "always",
+  tailwindStylesheet: "./src/main.css",
   overrides: [
     {
       files: ["*.njk"],
