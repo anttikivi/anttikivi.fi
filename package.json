@@ -20,6 +20,11 @@
     "format": "prettier --write \"**/*.{html,js?(on),md,njk}\"",
     "lint": "eslint ."
   },
+  "browserslist": [
+    ">0.05%",
+    "defaults and fully supports es6-module",
+    "maintained node versions"
+  ],
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@eslint/js": "^9.16.0",

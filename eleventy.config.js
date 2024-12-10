@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/postcss";
 import memoize from "memoize";
 import crypto from "node:crypto";
 import fs from "node:fs";
+import path from "node:path";
 import postcss from "postcss";
 
 /**
