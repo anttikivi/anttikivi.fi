@@ -1,0 +1,12 @@
+<!doctype html>
+<html class="scheme-light dark:scheme-dark" lang="{{ lang }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="{{ '/main.css' | hash }}" rel="stylesheet" />
+  </head>
+  <body>
+    <main id="{{ t.mainID }}">{{ content | safe }}</main>
+  </body>
+</html>

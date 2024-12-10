@@ -15,7 +15,7 @@
   "author": "Antti Kivi <antti@anttikivi.fi> (https://www.anttikivi.fi)",
   "type": "module",
   "scripts": {
-    "build": "NODE_ENV=$([ \"$(git rev-parse --abbrev-ref HEAD)\" = \"main\" ] && echo \"production\" || echo \"staging\") eleventy",
+    "build": "rm -rf _site && NODE_ENV=$([ \"$(git rev-parse --abbrev-ref HEAD)\" = \"main\" ] && echo \"production\" || echo \"staging\") eleventy",
     "dev": "NODE_ENV=development eleventy --serve",
     "format": "prettier --write \"**/*.{html,js?(on),md,njk}\"",
     "lint": "eslint ."
@@ -26,6 +26,7 @@
     "@tailwindcss/postcss": "^4.0.0-beta.6",
     "eslint": "^9.16.0",
     "globals": "^15.13.0",
+    "memoize": "^10.0.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
     "prettier-plugin-jinja-template": "^2.0.0",
