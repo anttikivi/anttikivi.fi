@@ -7,7 +7,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import postcss from "postcss";
-import fixTailwindVariables from "./lightningcss-plugin-fix-tailwind-variables.js";
+import fixTailwindColors from "./lightningcss-plugin-fix-tailwind-colors.js";
 
 /**
  * @typedef ProcessInput
@@ -49,7 +49,7 @@ async function processCSS(input) {
     targets,
     include: Features.Colors,
     minify: true,
-    visitor: fixTailwindVariables,
+    visitor: fixTailwindColors,
   });
 
   const hash = crypto.createHash("sha256").update(code).digest("hex");
