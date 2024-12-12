@@ -1,10 +1,13 @@
 import { EleventyI18nPlugin } from "@11ty/eleventy";
 import tailwindcss from "@tailwindcss/postcss";
+import browserslist from "browserslist";
+import { browserslistToTargets, Features, transform } from "lightningcss";
 import memoize from "memoize";
 import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import postcss from "postcss";
+import fixTailwindVariables from "./lightningcss-plugin-fix-tailwind-variables.js";
 
 /**
  * @typedef ProcessInput
@@ -39,9 +42,19 @@ async function processCSS(input) {
     from: inputPath,
   });
 
-  const hash = crypto.createHash("sha256").update(result.css).digest("hex");
+  let targets = browserslistToTargets(browserslist(">0.01%"));
 
-  return { text: result.css, hash };
+  const { code } = transform({
+    code: Buffer.from(result.css),
+    targets,
+    include: Features.Colors,
+    minify: true,
+    visitor: fixTailwindVariables,
+  });
+
+  const hash = crypto.createHash("sha256").update(code).digest("hex");
+
+  return { text: code, hash };
 }
 
 /**
