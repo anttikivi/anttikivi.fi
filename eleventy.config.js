@@ -1,5 +1,6 @@
 import { EleventyI18nPlugin } from "@11ty/eleventy";
 import path from "node:path";
+import paths from "./src/_data/paths.js";
 import { processCSS } from "./utils/css.js";
 import { createFileHash } from "./utils/hash.js";
 
@@ -25,6 +26,25 @@ export default function (eleventyConfig) {
       } else {
         return filename;
       }
+    },
+  );
+
+  eleventyConfig.addFilter(
+    "tUrl",
+    /** @type {(value: string, lang?: string) => void} */ function (
+      value,
+      lang,
+    ) {
+      if (lang === this.page.lang) {
+        return value;
+      }
+      const locale = lang ? lang : this.page.lang;
+      if (value in paths[locale]) {
+        return `${paths[locale][value]}`;
+      }
+      throw new ReferenceError(
+        `Trying to translate the path ${value} to the locale ${locale} but no valid translation was found.`,
+      );
     },
   );
 
