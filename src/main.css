@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 @theme {
+  --color-*: initial;
+
+  --color-stone-100: oklch(0.97 0.001 106.424);
+  --color-stone-900: oklch(0.216 0.006 56.043);
+
   --font-*: initial;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

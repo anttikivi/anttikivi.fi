@@ -1,57 +1,37 @@
 import { EleventyI18nPlugin } from "@11ty/eleventy";
-import tailwindcss from "@tailwindcss/postcss";
-import browserslist from "browserslist";
-import { browserslistToTargets, Features, transform } from "lightningcss";
 import memoize from "memoize";
 import crypto from "node:crypto";
-import fs from "node:fs";
 import path from "node:path";
-import postcss from "postcss";
-import fixTailwindColors from "./lightningcss-plugin-fix-tailwind-colors.js";
+import compileTailwind from "./utils/compile-tailwind/index.js";
 
 /**
- * @typedef ProcessInput
+ * @typedef {object} ProcessInput
  * @property {string} path
  * @property {string} contents
  */
 
 /**
- * @typedef ProcessResult
+ * @typedef {object} ProcessResult
  * @property {string} text
  * @property {string} hash
  */
 
 /**
  * @callback ProcessFunction
- * @param {ProcessInput} input
+ * @param {string} inputPath
+ *
  * @returns {Promise<ProcessResult>}
  */
 
 /**
  * @type {ProcessFunction}
  */
-async function processCSS(input) {
-  const { path: inputPath, contents } = input;
-  if (!contents) {
-    console.error("no contents were passed to be processed by PostCSS");
-  }
-
-  let plugins = [tailwindcss];
-
-  const result = await postcss(plugins).process(contents, {
-    from: inputPath,
-  });
-
-  let targets = browserslistToTargets(browserslist(">0.01%"));
-
-  const { code } = transform({
-    code: Buffer.from(result.css),
-    targets,
-    include: Features.Colors,
-    minify: true,
-    visitor: fixTailwindColors,
-  });
-
+async function processCSS(inputPath) {
+  const code = await compileTailwind(
+    inputPath,
+    path.resolve(process.cwd(), "src"),
+    undefined,
+  );
   const hash = crypto.createHash("sha256").update(code).digest("hex");
 
   return { text: code, hash };
@@ -62,11 +42,11 @@ async function processCSS(input) {
  */
 async function createFileHash(inputPath) {
   try {
-    const contents = fs.readFileSync(inputPath, "utf-8");
+    // const contents = fs.readFileSync(inputPath, "utf-8");
     /** @type {ProcessResult} */
     let processed = undefined;
     if (inputPath.endsWith(".css")) {
-      processed = await processCSS({ path: inputPath, contents: contents });
+      processed = await processCSS(inputPath);
     } else {
       throw new Error("invalid file type passed to the hashing function");
     }
@@ -111,7 +91,7 @@ export default function (eleventyConfig) {
     outputFileExtension: "css",
     compile: function (contents, inputPath) {
       return async function () {
-        return (await processCSS({ path: inputPath, contents: contents })).text;
+        return (await processCSS(inputPath)).text;
       };
     },
     compileOptions: {
