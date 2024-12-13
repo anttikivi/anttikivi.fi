@@ -4,12 +4,10 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { compile } from "tailwindcss-node-compiler";
 
-/** @typedef {{ code: string, hash: string }} ProcessResult */
-
 /**
  * @param {string} input The CSS that should be compiled.
  *
- * @returns {Promise<ProcessResult>}
+ * @returns {Promise<import("./processing").ProcessResult>}
  */
 async function _processCSS(input) {
   const code = await compile(
@@ -28,7 +26,7 @@ export const processCSS = memoize(_processCSS);
 /**
  * @param {string} inputPath Path to the CSS file to compile.
  *
- * @returns {Promise<ProcessResult>}
+ * @returns {Promise<import("./processing").ProcessResult>}
  */
 async function _processCSSFile(inputPath) {
   const input = await fs.readFile(inputPath, "utf-8");

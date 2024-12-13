@@ -1,30 +1,7 @@
 import { EleventyI18nPlugin } from "@11ty/eleventy";
-import memoize from "memoize";
 import path from "node:path";
-import { processCSS, processCSSFile } from "./utils/process-css.js";
-
-/**
- * @param {string} inputPath
- *
- * @returns {Promise<string>}
- */
-async function _createFileHash(inputPath) {
-  try {
-    /** @type {Awaited<ReturnType<typeof _processCSS>>} */
-    let result = undefined;
-    if (inputPath.endsWith(".css")) {
-      result = await processCSSFile(inputPath);
-    } else {
-      throw new Error("invalid file type passed to the hashing function");
-    }
-    return result.hash;
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-/** @type {typeof _createFileHash} */
-const createFileHash = memoize(_createFileHash);
+import { processCSS } from "./utils/css.js";
+import { createFileHash } from "./utils/hash.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
