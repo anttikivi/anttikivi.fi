@@ -28,7 +28,15 @@ export default function (eleventyConfig) {
       }
     },
   );
-
+  eleventyConfig.addFilter(
+    "makePath",
+    /** @type {(value: string, lang: string) => void} */ function (
+      value,
+      lang,
+    ) {
+      return `${paths[lang][value]}index.html`;
+    },
+  );
   eleventyConfig.addFilter(
     "tUrl",
     /** @type {(value: string, lang?: string) => void} */ function (
