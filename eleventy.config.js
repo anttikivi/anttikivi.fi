@@ -2,7 +2,7 @@ import { EleventyI18nPlugin } from "@11ty/eleventy";
 import memoize from "memoize";
 import crypto from "node:crypto";
 import path from "node:path";
-import compileTailwind from "./utils/compile-tailwind/index.js";
+import { compileFile } from "tailwindcss-node-compiler";
 
 /**
  * @typedef {object} ProcessInput
@@ -27,7 +27,7 @@ import compileTailwind from "./utils/compile-tailwind/index.js";
  * @type {ProcessFunction}
  */
 async function processCSS(inputPath) {
-  const code = await compileTailwind(
+  const code = await compileFile(
     inputPath,
     path.resolve(process.cwd(), "src"),
     undefined,
