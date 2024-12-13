@@ -1,60 +1,30 @@
 import { EleventyI18nPlugin } from "@11ty/eleventy";
 import memoize from "memoize";
-import crypto from "node:crypto";
 import path from "node:path";
-import { compileFile } from "tailwindcss-node-compiler";
+import { processCSS, processCSSFile } from "./utils/process-css.js";
 
 /**
- * @typedef {object} ProcessInput
- * @property {string} path
- * @property {string} contents
- */
-
-/**
- * @typedef {object} ProcessResult
- * @property {string} text
- * @property {string} hash
- */
-
-/**
- * @callback ProcessFunction
  * @param {string} inputPath
  *
- * @returns {Promise<ProcessResult>}
+ * @returns {Promise<string>}
  */
-
-/**
- * @type {ProcessFunction}
- */
-async function processCSS(inputPath) {
-  const code = await compileFile(
-    inputPath,
-    path.resolve(process.cwd(), "src"),
-    undefined,
-  );
-  const hash = crypto.createHash("sha256").update(code).digest("hex");
-
-  return { text: code, hash };
-}
-
-/**
- * @param {string} inputPath
- */
-async function createFileHash(inputPath) {
+async function _createFileHash(inputPath) {
   try {
-    // const contents = fs.readFileSync(inputPath, "utf-8");
-    /** @type {ProcessResult} */
-    let processed = undefined;
+    /** @type {Awaited<ReturnType<typeof _processCSS>>} */
+    let result = undefined;
     if (inputPath.endsWith(".css")) {
-      processed = await processCSS(inputPath);
+      result = await processCSSFile(inputPath);
     } else {
       throw new Error("invalid file type passed to the hashing function");
     }
-    return processed.hash;
+    return result.hash;
   } catch (err) {
     console.error(err);
   }
 }
+
+/** @type {typeof _createFileHash} */
+const createFileHash = memoize(_createFileHash);
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
@@ -64,7 +34,7 @@ export default function (eleventyConfig) {
 
   eleventyConfig.addFilter(
     "hash",
-    /** @param {string} filename */ memoize(async function (filename) {
+    /** @param {string} filename */ async function (filename) {
       if (process.env.NODE_ENV === "development") {
         return filename;
       }
@@ -75,23 +45,18 @@ export default function (eleventyConfig) {
           return `/${hash}.css`;
         }
         return `${filename.substring(0, filename.lastIndexOf("."))}.${hash}.css`;
-      } else if (filename.endsWith(".js")) {
-        if (process.env.NODE_ENV === "production") {
-          return `/${hash}.js`;
-        }
-        return `${filename.substring(0, filename.lastIndexOf("."))}.${hash}.js`;
       } else {
         return filename;
       }
-    }),
+    },
   );
 
   eleventyConfig.addTemplateFormats("css");
   eleventyConfig.addExtension("css", {
     outputFileExtension: "css",
-    compile: function (contents, inputPath) {
+    compile: function (contents) {
       return async function () {
-        return (await processCSS(inputPath)).text;
+        return (await processCSS(contents)).code;
       };
     },
     compileOptions: {

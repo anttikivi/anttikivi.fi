@@ -15,8 +15,9 @@
   "author": "Antti Kivi <antti@anttikivi.fi> (https://www.anttikivi.fi)",
   "type": "module",
   "scripts": {
-    "build": "rm -rf _site && NODE_ENV=$([ \"$(git rev-parse --abbrev-ref HEAD)\" = \"main\" ] && echo \"production\" || echo \"staging\") eleventy",
-    "build:production": "rm -rf _site && NODE_ENV=\"production\" eleventy",
+    "build": "rm -rf _site && NODE_ENV=development eleventy",
+    "build:production": "rm -rf _site && NODE_ENV=production eleventy",
+    "build:staging": "rm -rf _site && NODE_ENV=staging eleventy",
     "dev": "NODE_ENV=development eleventy --serve",
     "format": "prettier --write \"**/*.{html,js?(on),md,njk}\"",
     "lint": "eslint ."
