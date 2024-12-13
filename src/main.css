@@ -6,6 +6,9 @@
   --color-stone-100: oklch(0.97 0.001 106.424);
   --color-stone-900: oklch(0.216 0.006 56.043);
 
+  --color-green-400: oklch(0.765 0.177 163.223);
+  --color-green-700: oklch(0.508 0.118 165.612);
+
   --font-*: initial;
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -13,4 +16,11 @@
     "Times New Roman", Times, serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@variant anchors (& a);
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2rem;
 }

@@ -1,6 +1,6 @@
 ---
 date: git Last Modified
-layout: layout.njk
+layout: home.njk
 permalink: /
 title: Etusivu
 ---
