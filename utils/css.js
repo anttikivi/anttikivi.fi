@@ -61,7 +61,8 @@ async function _processCSS(input) {
 }
 
 /** @type {typeof _processCSS} */
-export const processCSS = memoize(_processCSS);
+export const processCSS =
+  process.env.NODE_ENV === "development" ? _processCSS : memoize(_processCSS);
 
 /**
  * @param {string} inputPath Path to the CSS file to compile.
@@ -74,4 +75,7 @@ async function _processCSSFile(inputPath) {
 }
 
 /** @type {typeof _processCSSFile} */
-export const processCSSFile = memoize(_processCSSFile);
+export const processCSSFile =
+  process.env.NODE_ENV === "development"
+    ? _processCSSFile
+    : memoize(_processCSSFile);
