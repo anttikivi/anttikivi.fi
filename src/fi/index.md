@@ -1,7 +1,7 @@
 ---
 date: git Last Modified
 layout: home.njk
-permalink: /
+permalink: '{{ "/" | makePath("fi") }}'
 title: Etusivu
 ---
 
