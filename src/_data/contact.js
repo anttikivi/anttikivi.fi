@@ -1,7 +1,7 @@
 export default {
   socialMedia: {
-    githubUrl: "https://github.com/anttikivi",
-    instagramUrl: "https://www.instagram.com/anttikiwi/",
-    threadsUrl: "https://www.threads.net/@anttikiwi",
+    githubURL: "https://github.com/anttikivi",
+    instagramURL: "https://www.instagram.com/anttikiwi/",
+    threadsURL: "https://www.threads.net/@anttikiwi",
   },
 };

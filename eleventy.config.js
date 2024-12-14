@@ -38,7 +38,7 @@ export default function (eleventyConfig) {
     },
   );
   eleventyConfig.addFilter(
-    "tUrl",
+    "tURL",
     /** @type {(value: string, lang?: string) => void} */ function (
       value,
       lang,

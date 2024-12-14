@@ -29,7 +29,7 @@
     >
       <a
         class="text-gray-900 dark:text-gray-100 hover:text-green-700 focus:text-green-700 hover:dark:text-green-400 focus:dark:text-green-400"
-        href="{{ '/' | tUrl }}"
+        href="{{ '/' | tURL }}"
       >
         <svg class="size-14" viewBox="0 0 1024 1024" role="img">
           <title>{{- t.logoAlt -}}</title>
@@ -59,7 +59,7 @@
       <div class="flex flex-row justify-center gap-6 sm:justify-end">
         <a
           class="hover:text-green-700 focus:text-green-700 hover:dark:text-green-400 focus:dark:text-green-400"
-          href="{{- contact.socialMedia.threadsUrl -}}"
+          href="{{- contact.socialMedia.threadsURL -}}"
           rel="nofollow"
         >
           <span class="sr-only">{{- t.socialMedia.threadsLogoAlt -}}</span>
@@ -67,7 +67,7 @@
         </a>
         <a
           class="hover:text-green-700 focus:text-green-700 hover:dark:text-green-400 focus:dark:text-green-400"
-          href="{{- contact.socialMedia.instagramUrl -}}"
+          href="{{- contact.socialMedia.instagramURL -}}"
           rel="nofollow"
         >
           <span class="sr-only">{{- t.socialMedia.instagramLogoAlt -}}</span>
@@ -75,7 +75,7 @@
         </a>
         <a
           class="hover:text-green-700 focus:text-green-700 hover:dark:text-green-400 focus:dark:text-green-400"
-          href="{{- contact.socialMedia.githubUrl -}}"
+          href="{{- contact.socialMedia.githubURL -}}"
           rel="nofollow"
         >
           <span class="sr-only">{{- t.socialMedia.githubLogoAlt -}}</span>
@@ -89,7 +89,7 @@
           <div class="my-2 sm:my-0">
             <a
               class="text-green-950 hover:underline focus:underline dark:text-green-100"
-              href="{{ link.link | tUrl }}"
+              href="{{ link.link | tURL }}"
             >
               {{- link.label[lang] -}}
             </a>
