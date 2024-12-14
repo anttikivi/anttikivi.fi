@@ -1,0 +1,14 @@
+<header>
+  <div class="container flex items-center justify-between py-10">
+    {% if isHome -%}
+      <h1 class="text-xl">{{- site.title -}}</h1>
+    {%- else -%}
+      <a
+        class="text-xl hover:underline focus:underline"
+        href="{{ '/' | tURL }}"
+      >
+        {{- site.title -}}
+      </a>
+    {%- endif -%}
+  </div>
+</header>
