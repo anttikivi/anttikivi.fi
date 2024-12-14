@@ -65,7 +65,8 @@
   {# TODO: Add og:locale #}
   <meta property="og:site_name" content="{{ site.title }}" />
 
-  <meta property="og:image" content="/opengraph-{{ lang }}.png" />
+  {# TODO: Allow adding custom OG images. #}
+  {% openGraphImage "opengraph.png", lang %}
 
   <link href="{{ '/main.css' | hash }}" rel="stylesheet" />
 

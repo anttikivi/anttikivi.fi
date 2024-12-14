@@ -6,6 +6,23 @@ import type UserConfig from "./node_modules/@11ty/eleventy/src/UserConfig.js";
 import { processCSS } from "./utils/css.ts";
 import { createFileHash } from "./utils/hash.ts";
 
+type ImageData = {
+  format: string;
+  width: number;
+  height: number;
+  url: string;
+  sourceType: string;
+};
+
+type ImageOutput = {
+  png: [ImageData];
+  svg: [ImageData];
+};
+
+const locales = ["en", "fi"] as const;
+
+type Locale = (typeof locales)[number];
+
 const paths = {
   en: {
     "/": "/en/",
@@ -17,6 +34,21 @@ const paths = {
     cv: "/ansioluettelo/",
     "data-protection": "/tietosuoja/",
   },
+};
+
+const siteData = {
+  url:
+    process.env.NODE_ENV === "production"
+      ? "https://www.anttikivi.fi"
+      : process.env.NODE_ENV === "staging"
+        ? "https://staging.anttikivi.fi"
+        : "http://localhost:8080",
+  description: "Viestintäasiantuntija, yrittäjä ja ylioppilas",
+  disabledLocales: [],
+  isProduction: process.env.NODE_ENV === "production",
+  locales,
+  subtitle: "Viestinnän asiantuntija",
+  title: "Antti Kivi",
 };
 
 export default async function (eleventyConfig: UserConfig) {
@@ -62,22 +94,16 @@ export default async function (eleventyConfig: UserConfig) {
       urlPath: "/",
       outputDir: "./_site",
     };
-    const svgIcons: { svg: [{ url: string }] } = await Image(
-      "./src/assets/favicon.svg",
-      {
-        widths: ["auto"],
-        formats: ["svg"],
-        ...options,
-      },
-    );
-    const pngIcons: { png: [{ width: number; url: string }] } = await Image(
-      "./src/assets/favicon.png",
-      {
-        widths: [16, 32, 180],
-        formats: ["png"],
-        ...options,
-      },
-    );
+    const svgIcons: ImageOutput = await Image("./src/assets/favicon.svg", {
+      widths: ["auto"],
+      formats: ["svg"],
+      ...options,
+    });
+    const pngIcons: ImageOutput = await Image("./src/assets/favicon.png", {
+      widths: [16, 32, 180],
+      formats: ["png"],
+      ...options,
+    });
     const icoHash = await createFileHash("./src/assets/favicon.ico");
     return `<link href="${svgIcons.svg[0].url}" rel="icon" type="image/svg+xml" />
 <link href="/${process.env.NODE_ENV !== "development" ? icoHash : "favicon"}.ico" rel="alternate icon" sizes="16x16" />
@@ -85,6 +111,33 @@ export default async function (eleventyConfig: UserConfig) {
 <link href="${pngIcons.png.find((a) => a.width === 16).url}" rel="icon" sizes="16x16" type="image/png" />
 <link href="${pngIcons.png.find((a) => a.width === 180).url}" rel="apple-touch-icon" sizes="180x180" />`;
   });
+  eleventyConfig.addShortcode(
+    "openGraphImage",
+    async function (src: string, lang?: Locale) {
+      if (!src.endsWith(".png")) {
+        throw new TypeError(
+          `The value for the OpenGraph image is not an PNG image: ${src}`,
+        );
+      }
+      const images: ImageOutput = await Image(
+        lang
+          ? `./src/assets/${src.split(".").slice(0, -1).join(".")}-${lang}.png`
+          : `./src/assets/${src}`,
+        {
+          widths: [1200],
+          formats: ["png"],
+          urlPath: "/",
+          outputDir: "./_site",
+        },
+      );
+      const img = images.png[0];
+      return `<meta property="og:image" content="${siteData.url}${img.url}" />
+<meta property="og:image:secure_url" content="${siteData.url}${img.url}" />
+<meta property="og:image:type" content="${img.sourceType}" />
+<meta property="og:image:width" content="${img.width}" />
+<meta property="og:image:height" content="${img.height}" />`;
+    },
+  );
 
   /*
    * Plugins
@@ -167,20 +220,7 @@ export default async function (eleventyConfig: UserConfig) {
     ],
   });
   eleventyConfig.addGlobalData("paths", paths);
-  eleventyConfig.addGlobalData("site", {
-    url:
-      process.env.NODE_ENV === "production"
-        ? "https://www.anttikivi.fi"
-        : process.env.NODE_ENV === "staging"
-          ? "https://staging.anttikivi.fi"
-          : "http://localhost:8080",
-    description: "Viestintäasiantuntija, yrittäjä ja ylioppilas",
-    disabledLocales: [],
-    isProduction: process.env.NODE_ENV === "production",
-    locales: ["en", "fi"],
-    subtitle: "Viestinnän asiantuntija",
-    title: "Antti Kivi",
-  });
+  eleventyConfig.addGlobalData("site", siteData);
 
   eleventyConfig.addTransform(
     "html-minifier-terser",
