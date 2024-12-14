@@ -7,6 +7,7 @@ export default {
         : "http://localhost:8080",
   description: "Viestintäasiantuntija, yrittäjä ja ylioppilas",
   disabledLocales: [],
+  isProduction: process.env.NODE_ENV === "production",
   locales: ["en", "fi"],
   subtitle: "Viestinnän asiantuntija",
   title: "Antti Kivi",
