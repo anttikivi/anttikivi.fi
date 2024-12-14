@@ -36,7 +36,7 @@ jobs:
           true"
 
       - name: Build the site
-        run: npm run build
+        run: npm run build:production
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3.0.1
