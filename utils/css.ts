@@ -1,11 +1,11 @@
 import browserslist from "browserslist";
 import { browserslistToTargets, Features } from "lightningcss";
+import normalizeColors from "lightningcss-plugin-normalize-colors";
 import memoize from "memoize";
 import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { compile, type CompilerOptions } from "tailwindcss-node-compiler";
-import fixTailwindColors from "./lightningcss-plugin-fix-tailwind-colors/index.js";
 import type { ProcessResult } from "./processing.ts";
 
 function _createOptions(
@@ -15,7 +15,7 @@ function _createOptions(
     sourceMap: false,
     include: Features.Nesting,
     exclude: Features.LogicalProperties | Features.DirSelector,
-    visitor: fixTailwindColors,
+    visitor: normalizeColors,
   };
 
   if (env === "production") {

@@ -33,6 +33,7 @@
     "globals": "^15.13.0",
     "html-minifier-terser": "^7.2.0",
     "lightningcss": "^1.28.2",
+    "lightningcss-plugin-normalize-colors": "^0.1.0",
     "memoize": "^10.0.0",
     "prettier": "^3.4.2",
     "prettier-plugin-jinja-template": "^2.0.0",
