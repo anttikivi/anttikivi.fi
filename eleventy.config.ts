@@ -2,8 +2,8 @@ import { EleventyI18nPlugin, type UserConfig } from "@11ty/eleventy";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import path from "node:path";
 import paths from "./src/_data/paths.js";
-import { processCSS } from "./utils/css.js";
-import { createFileHash } from "./utils/hash.js";
+import { processCSS } from "./utils/css.ts";
+import { createFileHash } from "./utils/hash.ts";
 
 export default function (eleventyConfig: UserConfig) {
   /*

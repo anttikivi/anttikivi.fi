@@ -1,15 +1,9 @@
 import memoize from "memoize";
 import { processCSSFile } from "./css.js";
 
-/**
- * @param {string} inputPath
- *
- * @returns {Promise<string>}
- */
-async function _createFileHash(inputPath) {
+async function _createFileHash(inputPath: string): Promise<string> {
   try {
-    /** @type {Awaited<ReturnType<typeof import("./css.js").processCSS>>} */
-    let result;
+    let result: Awaited<ReturnType<typeof processCSSFile>>;
     if (inputPath.endsWith(".css")) {
       result = await processCSSFile(inputPath);
     } else {
@@ -21,5 +15,4 @@ async function _createFileHash(inputPath) {
   }
 }
 
-/** @type {typeof _createFileHash} */
 export const createFileHash = memoize(_createFileHash);
