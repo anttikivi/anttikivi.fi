@@ -1,5 +1,6 @@
 import { EleventyI18nPlugin, type UserConfig } from "@11ty/eleventy";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import htmlMinifierTerser from "html-minifier-terser";
 import path from "node:path";
 import { processCSS } from "./utils/css.ts";
 import { createFileHash } from "./utils/hash.ts";
@@ -138,6 +139,24 @@ export default function (eleventyConfig: UserConfig) {
     subtitle: "Viestinnän asiantuntija",
     title: "Antti Kivi",
   });
+
+  eleventyConfig.addTransform(
+    "html-minifier-terser",
+    function (content: string) {
+      if (
+        process.env.NODE_ENV === "production" &&
+        (this.page.outputPath || "").endsWith(".html")
+      ) {
+        return htmlMinifierTerser.minify(content, {
+          useShortDoctype: true,
+          removeComments: true,
+          collapseWhitespace: true,
+        });
+      }
+
+      return content;
+    },
+  );
 }
 
 export const config = {
