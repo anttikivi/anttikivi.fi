@@ -43,7 +43,7 @@ const siteData = {
       : process.env.NODE_ENV === "staging"
         ? "https://staging.anttikivi.fi"
         : "http://localhost:8080",
-  description: "Viestintäasiantuntija, yrittäjä ja ylioppilas",
+  description: "Viestintäasiantuntija ja yrittäjä",
   disabledLocales: [],
   isProduction: process.env.NODE_ENV === "production",
   locales,
