@@ -19,6 +19,57 @@
   <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
   <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
 
+  <link href="{{ site.url }}{{ page.url }}" rel="canonical" />
+
+  <link
+    rel="alternate"
+    hreflang="{{ lang }}"
+    href="{{ site.url }}{{ page.url }}"
+  />
+  {% for link in page.url | locale_links %}
+    <link
+      rel="alternate"
+      hreflang="{{ link.lang }}"
+      href="{{ site.url }}{{ link.url }}"
+    />
+  {% endfor %}
+  {% if lang === "fi" %}
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="{{ site.url }}{{ page.url }}"
+    />
+  {% else %}
+    {% for link in page.url | locale_links %}
+      {% if link.lang === "fi" %}
+        <link
+          rel="alternate"
+          hreflang="x-default"
+          href="{{ site.url }}{{ link.url }}"
+        />
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {% if isHome -%}
+    <meta
+      property="og:title"
+      content="{{ site.title }} - {{ site.subtitle }}"
+    />
+  {%- else -%}
+    <meta property="og:title" content="{{ title }} - {{ site.title }}" />
+  {%- endif -%}
+
+  {% if description %}
+    <meta property="og:description" content="{{ description }}" />
+  {% else %}
+    <meta property="og:description" content="{{ site.description }}" />
+  {% endif %}
+  {# TODO: Add og:type #}
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}" />
+  {# TODO: Add og:locale #}
+  <meta property="og:site_name" content="{{ site.title }}" />
+
   <meta property="og:image" content="/opengraph-{{ lang }}.png" />
 
   <link href="{{ '/main.css' | hash }}" rel="stylesheet" />
