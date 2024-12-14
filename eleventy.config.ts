@@ -1,9 +1,21 @@
 import { EleventyI18nPlugin, type UserConfig } from "@11ty/eleventy";
 import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import path from "node:path";
-import paths from "./src/_data/paths.js";
 import { processCSS } from "./utils/css.ts";
 import { createFileHash } from "./utils/hash.ts";
+
+const paths = {
+  en: {
+    "/": "/en/",
+    cv: "/en/cv/",
+    "data-protection": "/en/data-protection/",
+  },
+  fi: {
+    "/": "/",
+    cv: "/ansioluettelo/",
+    "data-protection": "/tietosuoja/",
+  },
+};
 
 export default function (eleventyConfig: UserConfig) {
   /*
@@ -64,7 +76,6 @@ export default function (eleventyConfig: UserConfig) {
    * Template Formats
    */
   eleventyConfig.addTemplateFormats("css");
-
   eleventyConfig.addExtension("css", {
     outputFileExtension: "css",
     compile: function (contents: string) {
@@ -88,6 +99,44 @@ export default function (eleventyConfig: UserConfig) {
         return `${filename}.${hash}.css`;
       },
     },
+  });
+
+  eleventyConfig.addGlobalData("contact", {
+    socialMedia: {
+      githubURL: "https://github.com/anttikivi",
+      instagramURL: "https://www.instagram.com/anttikiwi/",
+      threadsURL: "https://www.threads.net/@anttikiwi",
+    },
+  });
+  eleventyConfig.addGlobalData("nav", {
+    languages: {
+      en: "In English",
+      fi: "Suomeksi",
+    },
+    terms: [
+      {
+        link: "data-protection",
+        label: {
+          en: "Data protection",
+          fi: "Tietosuoja",
+        },
+      },
+    ],
+  });
+  eleventyConfig.addGlobalData("paths", paths);
+  eleventyConfig.addGlobalData("site", {
+    url:
+      process.env.NODE_ENV === "production"
+        ? "https://www.anttikivi.fi"
+        : process.env.NODE_ENV === "staging"
+          ? "https://staging.anttikivi.fi"
+          : "http://localhost:8080",
+    description: "Viestintäasiantuntija, yrittäjä ja ylioppilas",
+    disabledLocales: [],
+    isProduction: process.env.NODE_ENV === "production",
+    locales: ["en", "fi"],
+    subtitle: "Viestinnän asiantuntija",
+    title: "Antti Kivi",
   });
 }
 
