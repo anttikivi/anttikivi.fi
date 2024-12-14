@@ -39,7 +39,10 @@ function _createOptions(
   return { disableTransforms: true };
 }
 
-const createOptions = memoize(_createOptions);
+const createOptions =
+  process.env.NODE_ENV === "development"
+    ? _createOptions
+    : memoize(_createOptions);
 
 async function _processCSS(input: string): Promise<ProcessResult> {
   const code = await compile(
