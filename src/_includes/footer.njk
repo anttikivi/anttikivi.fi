@@ -8,7 +8,7 @@
       aria-label="{{- t.footer.languageMenuLabel -}}"
     >
       {% for link in page.url | locale_links %}
-        {% if not site.disabledLocales.includes(locale) -%}
+        {% if not site.disabledLanguages.includes(language) -%}
           <li lang="{{- link.lang -}}" role="menuitem">
             <a
               class="text-green-950 underline hover:text-green-700 hover:no-underline focus:text-green-700 focus:no-underline dark:text-green-100 hover:dark:text-green-400 focus:dark:text-green-400"

@@ -19,9 +19,9 @@ type ImageOutput = {
   svg: [ImageData];
 };
 
-const locales = ["en", "fi"] as const;
+const languages = ["en", "fi"] as const;
 
-type Locale = (typeof locales)[number];
+type Language = (typeof languages)[number];
 
 const paths = {
   en: {
@@ -44,9 +44,9 @@ const siteData = {
         ? "https://staging.anttikivi.fi"
         : "http://localhost:8080",
   description: "Viestintäasiantuntija ja yrittäjä",
-  disabledLocales: [],
+  disabledLanguages: [],
   isProduction: process.env.NODE_ENV === "production",
-  locales,
+  languages,
   subtitle: "Viestinnän asiantuntija",
   title: "Antti Kivi",
 };
@@ -77,12 +77,12 @@ export default async function (eleventyConfig: UserConfig) {
     if (lang === this.page.lang) {
       return value;
     }
-    const locale = lang ? lang : this.page.lang;
-    if (value in paths[locale]) {
-      return `${paths[locale][value]}`;
+    const language = lang ? lang : this.page.lang;
+    if (value in paths[language]) {
+      return `${paths[language][value]}`;
     }
     throw new ReferenceError(
-      `Trying to translate the path ${value} to the locale ${locale} but no valid translation was found.`,
+      `Trying to translate the path ${value} to ${language} but no valid translation was found.`,
     );
   });
 
@@ -113,7 +113,7 @@ export default async function (eleventyConfig: UserConfig) {
   });
   eleventyConfig.addShortcode(
     "openGraphImage",
-    async function (src: string, lang?: Locale) {
+    async function (src: string, lang?: Language) {
       if (!src.endsWith(".png")) {
         throw new TypeError(
           `The value for the OpenGraph image is not an PNG image: ${src}`,
