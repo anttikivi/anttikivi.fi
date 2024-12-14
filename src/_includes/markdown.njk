@@ -1,0 +1,15 @@
+---
+isHome: false
+layout: layout.njk
+---
+
+<header>
+  <div class="container mt-10">
+    <h1 class="text-2xl md:text-3xl">{{- title -}}</h1>
+  </div>
+</header>
+<section
+  class="container text-lg *:my-6 first:mt-0 last:mb-0 anchors:underline anchors:hover:text-green-700 anchors:hover:no-underline anchors:focus:text-green-700 anchors:focus:no-underline dark:anchors:hover:text-green-400 dark:anchors:focus:text-green-400 [&_em]:ml-[0.18rem] [&_em]:font-serif [&_em]:italic"
+>
+  {{ content | safe }}
+</section>
