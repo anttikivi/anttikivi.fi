@@ -7,18 +7,9 @@ import { createFileHash } from "./utils/hash.js";
 
 /** @param {import("@11ty/eleventy").UserConfig} eleventyConfig */
 export default function (eleventyConfig) {
-  eleventyConfig.addPlugin(EleventyI18nPlugin, {
-    defaultLanguage: "fi",
-  });
-  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
-    extensions: "html",
-    formats: ["webp", "jpeg"],
-    defaultAttributes: {
-      loading: "lazy",
-      decoding: "async",
-    },
-  });
-
+  /*
+   * Filters
+   */
   eleventyConfig.addFilter(
     "hash",
     /** @param {string} filename */ async function (filename) {
@@ -65,7 +56,31 @@ export default function (eleventyConfig) {
     },
   );
 
+  /*
+   * Plugins
+   */
+  eleventyConfig.addPlugin(EleventyI18nPlugin, {
+    defaultLanguage: "fi",
+  });
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    extensions: "html",
+    formats: ["webp", "jpeg"],
+    defaultAttributes: {
+      loading: "lazy",
+      decoding: "async",
+    },
+  });
+
+  /**
+   * Pass-through copies
+   */
+  eleventyConfig.addPassthroughCopy({ "src/assets": "/" });
+
+  /*
+   * Template Formats
+   */
   eleventyConfig.addTemplateFormats("css");
+
   eleventyConfig.addExtension("css", {
     outputFileExtension: "css",
     compile: function (contents) {

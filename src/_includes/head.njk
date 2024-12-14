@@ -1,0 +1,32 @@
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  {% if isHome -%}
+    <title>{{ site.title }} - {{ site.subtitle }}</title>
+  {%- else -%}
+    <title>{{ title }} - {{ site.title }}</title>
+  {%- endif -%}
+  {% if description %}
+    <meta name="description" content="{{ description }}" />
+  {% else %}
+    <meta name="description" content="{{ site.description }}" />
+  {% endif %}
+
+  <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
+  <link href="/favicon.ico" rel="alternate icon" sizes="16x16" />
+  <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png" />
+  <link href="/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png" />
+  <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180" />
+
+  <meta property="og:image" content="/opengraph-{{ lang }}.png" />
+
+  <link href="{{ '/main.css' | hash }}" rel="stylesheet" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Manrope:wght@200..800&display=swap"
+    rel="stylesheet"
+  />
+</head>
