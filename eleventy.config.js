@@ -1,4 +1,5 @@
 import { EleventyI18nPlugin } from "@11ty/eleventy";
+import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import path from "node:path";
 import paths from "./src/_data/paths.js";
 import { processCSS } from "./utils/css.js";
@@ -8,6 +9,14 @@ import { createFileHash } from "./utils/hash.js";
 export default function (eleventyConfig) {
   eleventyConfig.addPlugin(EleventyI18nPlugin, {
     defaultLanguage: "fi",
+  });
+  eleventyConfig.addPlugin(eleventyImageTransformPlugin, {
+    extensions: "html",
+    formats: ["webp", "jpeg"],
+    defaultAttributes: {
+      loading: "lazy",
+      decoding: "async",
+    },
   });
 
   eleventyConfig.addFilter(
