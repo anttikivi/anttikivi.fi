@@ -1,7 +1,8 @@
-import { EleventyI18nPlugin, type UserConfig } from "@11ty/eleventy";
-import { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
+import { EleventyI18nPlugin } from "@11ty/eleventy";
+import Image, { eleventyImageTransformPlugin } from "@11ty/eleventy-img";
 import htmlMinifierTerser from "html-minifier-terser";
 import path from "node:path";
+import type UserConfig from "./node_modules/@11ty/eleventy/src/UserConfig.js";
 import { processCSS } from "./utils/css.ts";
 import { createFileHash } from "./utils/hash.ts";
 
@@ -18,7 +19,7 @@ const paths = {
   },
 };
 
-export default function (eleventyConfig: UserConfig) {
+export default async function (eleventyConfig: UserConfig) {
   /*
    * Filters
    */
@@ -54,6 +55,38 @@ export default function (eleventyConfig: UserConfig) {
   });
 
   /*
+   * Shortcodes
+   */
+  eleventyConfig.addShortcode("favicons", async function () {
+    const options = {
+      urlPath: "/",
+      outputDir: "./_site",
+    };
+    const svgIcons: { svg: [{ url: string }] } = await Image(
+      "./src/assets/favicon.svg",
+      {
+        widths: ["auto"],
+        formats: ["svg"],
+        ...options,
+      },
+    );
+    const pngIcons: { png: [{ width: number; url: string }] } = await Image(
+      "./src/assets/favicon.png",
+      {
+        widths: [16, 32, 180],
+        formats: ["png"],
+        ...options,
+      },
+    );
+    const icoHash = await createFileHash("./src/assets/favicon.ico");
+    return `<link href="${svgIcons.svg[0].url}" rel="icon" type="image/svg+xml" />
+<link href="/${process.env.NODE_ENV !== "development" ? icoHash : "favicon"}.ico" rel="alternate icon" sizes="16x16" />
+<link href="${pngIcons.png.find((a) => a.width === 32).url}" rel="icon" sizes="32x32" type="image/png" />
+<link href="${pngIcons.png.find((a) => a.width === 16).url}" rel="icon" sizes="16x16" type="image/png" />
+<link href="${pngIcons.png.find((a) => a.width === 180).url}" rel="apple-touch-icon" sizes="180x180" />`;
+  });
+
+  /*
    * Plugins
    */
   eleventyConfig.addPlugin(EleventyI18nPlugin, {
@@ -71,7 +104,16 @@ export default function (eleventyConfig: UserConfig) {
   /**
    * Pass-through copies
    */
-  eleventyConfig.addPassthroughCopy({ "src/assets": "/" });
+  // To be safe, add a pass-through copy of the plain "favicon.ico" in case
+  // the browser looks for it.
+  eleventyConfig.addPassthroughCopy({
+    "src/assets/favicon.ico": "/favicon.ico",
+  });
+  if (process.env.NODE_ENV !== "development") {
+    eleventyConfig.addPassthroughCopy({
+      "src/assets/favicon.ico": `/${await createFileHash("./src/assets/favicon.ico")}.ico`,
+    });
+  }
 
   /*
    * Template Formats
