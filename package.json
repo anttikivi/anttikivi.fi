@@ -15,19 +15,20 @@
   "author": "Antti Kivi <antti@anttikivi.fi> (https://www.anttikivi.fi)",
   "type": "module",
   "scripts": {
-    "build": "rm -rf _site && NODE_ENV=development eleventy",
-    "build:production": "rm -rf _site && NODE_ENV=production eleventy",
-    "build:staging": "rm -rf _site && NODE_ENV=staging eleventy",
-    "dev": "NODE_ENV=development eleventy --serve",
+    "build": "rm -rf _site && NODE_ENV=development tsx ./node_modules/.bin/eleventy --config=eleventy.config.ts",
+    "build:production": "rm -rf _site && NODE_ENV=production tsx ./node_modules/.bin/eleventy --config=eleventy.config.ts",
+    "build:staging": "rm -rf _site && NODE_ENV=staging tsx ./node_modules/.bin/eleventy --config=eleventy.config.ts",
+    "dev": "NODE_ENV=development tsx ./node_modules/.bin/eleventy --serve",
     "format": "prettier --write \"**/*.{html,js?(on),md,njk}\"",
     "lint": "eslint ."
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-img": "^5.0.0",
-    "@eslint/js": "^9.16.0",
+    "@eslint/js": "^9.17.0",
+    "@types/node": "^22.10.2",
     "browserslist": "^4.24.2",
-    "eslint": "^9.16.0",
+    "eslint": "^9.17.0",
     "globals": "^15.13.0",
     "lightningcss": "^1.28.2",
     "memoize": "^10.0.0",
@@ -37,6 +38,9 @@
     "prettier-plugin-packagejson": "^2.5.6",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "tailwindcss": "^4.0.0-beta.6",
-    "tailwindcss-node-compiler": "^0.2.0"
+    "tailwindcss-node-compiler": "^0.3.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.0"
   }
 }
