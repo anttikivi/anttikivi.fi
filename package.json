@@ -18,7 +18,7 @@
     "build": "rm -rf _site && NODE_ENV=development tsx ./node_modules/.bin/eleventy --config=eleventy.config.ts",
     "build:production": "rm -rf _site && NODE_ENV=production tsx ./node_modules/.bin/eleventy --config=eleventy.config.ts",
     "build:staging": "rm -rf _site && NODE_ENV=staging tsx ./node_modules/.bin/eleventy --config=eleventy.config.ts",
-    "dev": "NODE_ENV=development tsx ./node_modules/.bin/eleventy --serve",
+    "dev": "NODE_ENV=development tsx ./node_modules/.bin/eleventy --config=eleventy.config.ts --serve",
     "format": "prettier --write \"**/*.{html,js?(on),md,njk}\"",
     "lint": "eslint ."
   },
