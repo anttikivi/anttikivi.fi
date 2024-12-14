@@ -34,29 +34,6 @@
       </div>
     </header>
     <main id="{{ t.mainID }}">{{ content | safe }}</main>
-    <footer>
-      <div class="container">
-        {% if page.fileSlug !== "404" -%}
-          <ul
-            class="my-12 flex flex-col items-center md:my-8"
-            role="menu"
-            aria-label="{{- t.footer.languageMenuLabel -}}"
-          >
-            {% for link in page.url | locale_links %}
-              {% if not site.disabledLocales.includes(locale) -%}
-                <li lang="{{- link.lang -}}" role="menuitem">
-                  <a
-                    class="text-green-950 underline hover:text-green-700 hover:no-underline focus:text-green-700 focus:no-underline dark:text-green-100 hover:dark:text-green-400 focus:dark:text-green-400"
-                    href="{{- link.url -}}"
-                  >
-                    {{- nav.languages[link.lang] -}}
-                  </a>
-                </li>
-              {% endif -%}
-            {% endfor -%}
-          </ul>
-        {% endif -%}
-      </div>
-    </footer>
+    {% include "footer.njk" %}
   </body>
 </html>
