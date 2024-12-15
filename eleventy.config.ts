@@ -23,6 +23,11 @@ const languages = ["en", "fi"] as const;
 
 type Language = (typeof languages)[number];
 
+const locales = {
+  en: "en_US",
+  fi: "fi_FI",
+};
+
 const paths = {
   en: {
     "/": "/en/",
@@ -37,18 +42,19 @@ const paths = {
 };
 
 const siteData = {
+  description: "Viestintäasiantuntija ja yrittäjä",
+  disabledLanguages: [],
+  isProduction: process.env.NODE_ENV === "production",
+  languages,
+  locales,
+  subtitle: "Viestinnän asiantuntija",
+  title: "Antti Kivi",
   url:
     process.env.NODE_ENV === "production"
       ? "https://www.anttikivi.fi"
       : process.env.NODE_ENV === "staging"
         ? "https://staging.anttikivi.fi"
         : "http://localhost:8080",
-  description: "Viestintäasiantuntija ja yrittäjä",
-  disabledLanguages: [],
-  isProduction: process.env.NODE_ENV === "production",
-  languages,
-  subtitle: "Viestinnän asiantuntija",
-  title: "Antti Kivi",
 };
 
 export default async function (eleventyConfig: UserConfig) {

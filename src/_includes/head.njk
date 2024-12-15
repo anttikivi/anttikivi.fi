@@ -68,7 +68,19 @@
     <meta property="og:description" content="{{ site.description }}" />
   {% endif %}
 
-  {# TODO: Add og:locale #}
+  {% if page.fileSlug !== "404" -%}
+    <meta property="og:locale" content="{{ site.locales[lang] }}" />
+
+    {% for link in page.url | locale_links %}
+      {% if link.lang !== lang %}
+        <meta
+          property="og:locale:alternate"
+          content="{{ site.locales[link.lang] }}"
+        />
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
   <meta property="og:site_name" content="{{ site.title }}" />
 
   <link href="{{ '/main.css' | hash }}" rel="stylesheet" />
