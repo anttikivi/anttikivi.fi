@@ -1,6 +1,0 @@
-node_modules/
-_site/
-package-lock.json
-
-src/robots.txt.njk
-src/sitemap.xml.njk
