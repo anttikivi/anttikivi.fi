@@ -6,8 +6,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    if:
-      "!contains(github.event.head_commit.message, '[ci skip]') &&
+    if: "!contains(github.event.head_commit.message, '[ci skip]') &&
       !startsWith(github.event.head_commit.message, 'docs')"
     strategy:
       matrix:
@@ -32,8 +31,7 @@ jobs:
   check:
     name: Check
     runs-on: ubuntu-latest
-    if:
-      "!contains(github.event.head_commit.message, '[ci skip]') &&
+    if: "!contains(github.event.head_commit.message, '[ci skip]') &&
       !startsWith(github.event.head_commit.message, 'docs')"
     strategy:
       matrix:
