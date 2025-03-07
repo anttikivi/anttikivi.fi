@@ -5,6 +5,7 @@ const config = {
     "prettier-plugin-organize-imports",
     "prettier-plugin-tailwindcss",
   ],
+  tailwindStylesheet: "./src/app/globals.css",
   overrides: [
     {
       files: ["*.md"],
