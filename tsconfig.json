@@ -1,3 +1,14 @@
 {
-  "extends": "astro/tsconfigs/strictest"
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "plugins": [
+      {
+        "name": "@astrojs/ts-plugin"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
 }
