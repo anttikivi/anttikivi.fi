@@ -5,7 +5,8 @@ This is my personal website available at
 
 ## Licence
 
-The source code in this project is licensed under the MIT Licence. See the [`LICENSE`](LICENSE) file for more information.
+The source code in this project is licensed under the MIT Licence. See the
+[`LICENSE`](LICENSE) file for more information.
 
 All rights are reserved for the non-code contents in this project and for the
 SVG files and SVG code in
