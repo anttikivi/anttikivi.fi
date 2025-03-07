@@ -1,14 +1,11 @@
-# My website
-
-[![Main workflow](https://github.com/anttikivi/website/actions/workflows/main.yml/badge.svg)](https://github.com/anttikivi/website/actions/workflows/main.yml)
+# anttikivi.fi
 
 This is my personal website available at
 [anttikivi.fi](https://www.anttikivi.fi).
 
 ## Licence
 
-The source code in this project is licensed under the Apache-2.0 licence. See
-the [`LICENSE`](LICENSE) file for more information.
+The source code in this project is licensed under the MIT Licence. See the [`LICENSE`](LICENSE) file for more information.
 
 All rights are reserved for the non-code contents in this project and for the
 SVG files and SVG code in
