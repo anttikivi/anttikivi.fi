@@ -5,6 +5,7 @@ const config = {
     "prettier-plugin-packagejson",
     "prettier-plugin-organize-imports",
     "prettier-plugin-tailwindcss",
+    "prettier-plugin-astro-organize-imports",
   ],
   tailwindStylesheet: "./src/styles/global.css",
   overrides: [

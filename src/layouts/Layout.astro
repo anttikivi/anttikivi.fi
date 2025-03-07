@@ -1,5 +1,16 @@
 ---
+import Head from "@/components/Head.astro";
+import type { Locale } from "@/locales";
+import "@/styles/global.css";
 
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
 ---
 
-<html lang="fi"><slot /></html>
+<html class="scheme-light dark:scheme-dark" lang={locale}>
+  <Head />
+  <body><slot /></body>
+</html>
