@@ -1,5 +1,8 @@
 {
   "layout": {
+    "footer": {
+      "languageMenuLabel": "Sivuston kieli"
+    },
     "mainID": "sisalto",
     "skipToContent": "Siirry sisältöön",
     "socialMedia": {

@@ -1,5 +1,8 @@
 {
   "layout": {
+    "footer": {
+      "languageMenuLabel": "Site language"
+    },
     "mainID": "main",
     "skipToContent": "Skip to main content",
     "socialMedia": {

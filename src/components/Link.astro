@@ -1,0 +1,13 @@
+---
+import type { Locale } from "@/locales";
+import { getRoute } from "@/routes";
+
+interface Props {
+  href: string;
+  locale?: Locale;
+}
+
+const { href, locale = Astro.currentLocale } = Astro.props;
+---
+
+<a href={getRoute(locale as Locale, href)}><slot /></a>
