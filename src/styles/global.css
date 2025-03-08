@@ -6,6 +6,16 @@
   --color-neutral-50: oklch(98.5% 0 0);
   --color-neutral-900: oklch(20.5% 0 0);
 
+  /* Link color on dark background. */
+  --color-peach-200: oklch(88.5% 0.062 18.334);
+  --color-peach-300: oklch(80.8% 0.114 19.571);
+  /* Link hover color on dark backgrounds. */
+  --color-peach-400: oklch(70.4% 0.191 22.216);
+  /* Link hover color on light backgrounds. */
+  --color-peach-700: oklch(55.3% 0.195 38.402);
+  /* Link color on light background. */
+  --color-peach-800: oklch(47% 0.157 37.304);
+
   --font-*: initial;
   --font-sans:
     "Manrope", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",

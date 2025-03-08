@@ -3,11 +3,18 @@ import type { Locale } from "@/locales";
 import { getRoute } from "@/routes";
 
 interface Props {
+  class?: string;
   href: string;
   locale?: Locale;
 }
 
-const { href, locale = Astro.currentLocale } = Astro.props;
+const { class: className, href, locale = Astro.currentLocale } = Astro.props;
 ---
 
-<a href={getRoute(locale as Locale, href)}><slot /></a>
+<a
+  class:list={[
+    "text-peach-800 underline hover:text-peach-700 hover:no-underline focus:text-peach-700 focus:no-underline dark:text-peach-200 dark:hover:text-peach-400 dark:focus:text-peach-400",
+    className,
+  ]}
+  href={getRoute(locale as Locale, href)}><slot /></a
+>
