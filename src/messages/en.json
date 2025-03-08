@@ -1,0 +1,15 @@
+{
+  "layout": {
+    "mainID": "main",
+    "skipToContent": "Skip to main content",
+    "socialMedia": {
+      "githubLogoAlt": "GitHub logo",
+      "instagramLogoAlt": "Instagram logo",
+      "threadsLogoAlt": "Instagram Threads logo"
+    }
+  },
+  "site": {
+    "subtitle": "Communications expert",
+    "title": "Antti Kivi"
+  }
+}

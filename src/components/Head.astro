@@ -1,8 +1,13 @@
 ---
+import { useTranslations } from "@/i18n";
+import type { Locale } from "@/locales";
 
+const t = useTranslations("site", Astro.currentLocale as Locale);
 ---
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>{t("title")} - {t("subtitle")}</title>
 </head>

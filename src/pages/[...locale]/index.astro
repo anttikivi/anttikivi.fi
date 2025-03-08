@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import locales, { defaultLocale, type Locale } from "@/locales";
+import locales, { defaultLocale } from "@/locales";
 import type { GetStaticPathsResult } from "astro";
 
 export function getStaticPaths(): GetStaticPathsResult {
@@ -22,6 +22,6 @@ export function getStaticPaths(): GetStaticPathsResult {
 }
 ---
 
-<Layout locale={Astro.currentLocale as Locale}>
+<Layout>
   <p>Hello, world!</p>
 </Layout>

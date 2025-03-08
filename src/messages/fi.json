@@ -1,0 +1,15 @@
+{
+  "layout": {
+    "mainID": "sisalto",
+    "skipToContent": "Siirry sisältöön",
+    "socialMedia": {
+      "githubLogoAlt": "Githubin logo",
+      "instagramLogoAlt": "Instagramin logo",
+      "threadsLogoAlt": "Instagram Threadsin logo"
+    }
+  },
+  "site": {
+    "subtitle": "Viestinnän asiantuntija",
+    "title": "Antti Kivi"
+  }
+}
