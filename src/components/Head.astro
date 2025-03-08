@@ -1,13 +1,35 @@
 ---
 import { useTranslations } from "@/i18n";
-import type { Locale } from "@/locales";
+import { defaultLocale, type Locale } from "@/locales";
+
+interface Props {
+  description?: string;
+  title?: string;
+}
 
 const t = useTranslations("site", Astro.currentLocale as Locale);
+
+const { description = t("description"), title } = Astro.props;
+
+const isIndex =
+  (Astro.currentLocale === defaultLocale && Astro.url.pathname === "/") ||
+  (Astro.currentLocale !== defaultLocale &&
+    Astro.url.pathname === `/${Astro.currentLocale}/`);
 ---
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>{t("title")} - {t("subtitle")}</title>
+  {
+    isIndex ? (
+      // prettier-ignore
+      <title>{t("title")} - {t("subtitle")}</title>
+    ) : (
+      // prettier-ignore
+      <title>{title} - {t("title")}</title>
+    )
+  }
+
+  <meta name="description" content={description} />
 </head>
