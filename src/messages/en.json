@@ -1,7 +1,8 @@
 {
   "layout": {
     "footer": {
-      "languageMenuLabel": "Site language"
+      "languageMenuLabel": "Site language",
+      "logoAlt": "Antti Kivi"
     },
     "mainID": "main",
     "skipToContent": "Skip to main content",

@@ -1,7 +1,11 @@
 ---
+import Github from "@/assets/github.svg";
+import Instagram from "@/assets/instagram.svg";
 import Logo from "@/assets/logo.svg";
+import Threads from "@/assets/threads.svg";
 import Head from "@/components/Head.astro";
 import Link from "@/components/Link.astro";
+import contact from "@/contact";
 import { useTranslations } from "@/i18n";
 import { languages, type Locale } from "@/locales";
 import { getRoute, getRouteKey } from "@/routes";
@@ -53,9 +57,38 @@ const t = useTranslations("layout", locale);
             class="hover:text-peach-700 focus:text-peach-700 hover:dark:text-peach-400 focus:dark:text-peach-400"
             href={getRoute(locale, "/")}
           >
+            <span class="sr-only">{t("footer.logoAlt")}</span>
             <Logo class="size-14" />
           </a>
           <span>© 2025 Antti Kivi</span>
+        </div>
+        <div>
+          <div class="flex flex-row justify-center gap-6 sm:justify-end">
+            <a
+              class="hover:text-peach-700 focus:text-peach-700 hover:dark:text-peach-400 focus:dark:text-peach-400"
+              href={contact.threadsURL}
+              rel="nofollow"
+            >
+              <span class="sr-only">{t("socialMedia.threadsLogoAlt")}</span>
+              <Threads class="size-8" />
+            </a>
+            <a
+              class="hover:text-peach-700 focus:text-peach-700 hover:dark:text-peach-400 focus:dark:text-peach-400"
+              href={contact.instagramURL}
+              rel="nofollow"
+            >
+              <span class="sr-only">{t("socialMedia.instagramLogoAlt")}</span>
+              <Instagram class="size-8" />
+            </a>
+            <a
+              class="hover:text-peach-700 focus:text-peach-700 hover:dark:text-peach-400 focus:dark:text-peach-400"
+              href={contact.githubURL}
+              rel="nofollow"
+            >
+              <span class="sr-only">{t("socialMedia.githubLogoAlt")}</span>
+              <Github class="h-8 w-auto" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
