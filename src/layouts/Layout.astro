@@ -1,14 +1,23 @@
 ---
 import Head from "@/components/Head.astro";
+import { useTranslations } from "@/i18n";
+import type { Locale } from "@/locales";
 import "@/styles/global.css";
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/red-hat-mono";
 import "@fontsource/libre-baskerville/400-italic.css";
+
+const t = useTranslations("layout", Astro.currentLocale as Locale);
 ---
 
 <html class="scheme-light dark:scheme-dark" lang={Astro.currentLocale}>
   <Head />
   <body
     class="bg-neutral-50 font-sans text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50"
-    ><slot /></body>
+  >
+    <a class="sr-only focus:not-sr-only" href={`#${t("mainID")}`}
+      >{t("skipToContent")}</a
+    >
+    <main id={t("mainID")} class="container"><slot /></main>
+  </body>
 </html>
