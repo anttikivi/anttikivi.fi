@@ -1,6 +1,11 @@
 @import "tailwindcss";
 
 @theme {
+  --color-*: initial;
+
+  --color-neutral-50: oklch(98.5% 0 0);
+  --color-neutral-900: oklch(20.5% 0 0);
+
   --font-*: initial;
   --font-sans:
     "Manrope", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
