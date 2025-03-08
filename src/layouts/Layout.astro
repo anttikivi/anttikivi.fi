@@ -6,10 +6,9 @@ import "@fontsource-variable/red-hat-mono";
 import "@fontsource/libre-baskerville/400-italic.css";
 ---
 
-<html
-  class="bg-neutral-50 font-sans text-neutral-900 scheme-light dark:bg-neutral-900 dark:text-neutral-50 dark:scheme-dark"
-  lang={Astro.currentLocale}
->
+<html class="scheme-light dark:scheme-dark" lang={Astro.currentLocale}>
   <Head />
-  <body><slot /></body>
+  <body
+    class="bg-neutral-50 font-sans text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50"
+    ><slot /></body>
 </html>
