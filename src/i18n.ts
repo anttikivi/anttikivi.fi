@@ -13,7 +13,7 @@ const translations: Record<Locale, Translations> = {
 function getNestedValue(
   obj: (typeof translations)[Locale][Namespace],
   key: string,
-) {
+): string | undefined {
   const keys = key.split(".");
   let curr = obj;
 
@@ -28,6 +28,8 @@ function getNestedValue(
 
     curr = curr[k];
   }
+
+  return undefined;
 }
 
 export function useTranslations<N extends Namespace>(ns: N, lang: Locale) {
