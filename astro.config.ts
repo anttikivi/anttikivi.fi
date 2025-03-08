@@ -43,4 +43,9 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  experimental: {
+    svg: {
+      mode: "inline",
+    },
+  },
 });

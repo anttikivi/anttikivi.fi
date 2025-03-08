@@ -1,6 +1,7 @@
 /** @type {import("prettier").Config} */
 const config = {
   plugins: [
+    "@prettier/plugin-xml",
     "prettier-plugin-astro",
     "prettier-plugin-packagejson",
     "prettier-plugin-organize-imports",
@@ -19,6 +20,13 @@ const config = {
       files: ["*.md"],
       options: {
         proseWrap: "always",
+      },
+    },
+    {
+      files: ["*.svg"],
+      options: {
+        xmlSortAttributesByKey: true,
+        xmlWhitespaceSensitivity: "ignore",
       },
     },
   ],

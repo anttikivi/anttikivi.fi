@@ -1,18 +1,21 @@
 ---
+import Logo from "@/assets/logo.svg";
 import Head from "@/components/Head.astro";
 import Link from "@/components/Link.astro";
 import { useTranslations } from "@/i18n";
 import { languages, type Locale } from "@/locales";
-import { getRouteKey } from "@/routes";
+import { getRoute, getRouteKey } from "@/routes";
 import "@/styles/global.css";
 import "@fontsource-variable/manrope";
 import "@fontsource-variable/red-hat-mono";
 import "@fontsource/libre-baskerville/400-italic.css";
 
-const t = useTranslations("layout", Astro.currentLocale as Locale);
+const locale = Astro.currentLocale as Locale;
+
+const t = useTranslations("layout", locale);
 ---
 
-<html class="scheme-light dark:scheme-dark" lang={Astro.currentLocale}>
+<html class="scheme-light dark:scheme-dark" lang={locale}>
   <Head />
   <body
     class="bg-neutral-50 font-sans text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50"
@@ -26,7 +29,7 @@ const t = useTranslations("layout", Astro.currentLocale as Locale);
         <ul class="my-12 flex flex-col items-center md:my-8">
           {
             languages
-              .filter((lang) => lang.locale !== Astro.currentLocale)
+              .filter((lang) => lang.locale !== locale)
               .map((lang) => (
                 <li lang={lang.locale}>
                   <Link
@@ -40,6 +43,21 @@ const t = useTranslations("layout", Astro.currentLocale as Locale);
           }
         </ul>
       </nav>
+      <div
+        class="flex flex-col-reverse items-center justify-between py-10 sm:flex-row"
+      >
+        <div
+          class="my-12 flex flex-col items-center justify-start gap-4 sm:flex-row sm:gap-2 md:my-0"
+        >
+          <a
+            class="hover:text-peach-700 focus:text-peach-700 hover:dark:text-peach-400 focus:dark:text-peach-400"
+            href={getRoute(locale, "/")}
+          >
+            <Logo class="size-14" />
+          </a>
+          <span>© 2025 Antti Kivi</span>
+        </div>
+      </div>
     </footer>
   </body>
 </html>
