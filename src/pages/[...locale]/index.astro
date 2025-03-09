@@ -1,4 +1,5 @@
 ---
+import Prose from "@/components/Prose.astro";
 import Layout from "@/layouts/Layout.astro";
 import locales, { defaultLocale } from "@/locales";
 import type { GetStaticPathsResult } from "astro";
@@ -34,7 +35,7 @@ const { Content } = await render(preface);
 ---
 
 <Layout>
-  <div class="text-base">
+  <Prose>
     <Content />
-  </div>
+  </Prose>
 </Layout>
