@@ -61,6 +61,7 @@ const { Content } = await render(page);
 ---
 
 <Layout title={page.data.title}>
+  <h1 class="my-10 text-lg">{page.data.title}</h1>
   <Prose>
     <Content />
   </Prose>
