@@ -14,6 +14,12 @@ import "@fontsource-variable/manrope";
 import "@fontsource-variable/red-hat-mono";
 import "@fontsource/libre-baskerville/400-italic.css";
 
+interface Props {
+  title?: string;
+}
+
+const { title } = Astro.props;
+
 const locale = Astro.currentLocale as Locale;
 const t = useTranslations("layout", locale);
 const siteTitle = useTranslations("site", locale)("title");
@@ -24,7 +30,7 @@ const isIndex =
 ---
 
 <html class="scheme-light dark:scheme-dark" lang={locale}>
-  <Head />
+  <Head title={title} />
   <body
     class="bg-neutral-50 font-sans text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50"
   >

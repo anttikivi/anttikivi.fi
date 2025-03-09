@@ -4,7 +4,7 @@ import { defaultLocale, type Locale } from "@/locales";
 
 interface Props {
   description?: string;
-  title?: string;
+  title?: string | undefined;
 }
 
 const t = useTranslations("site", Astro.currentLocale as Locale);

@@ -60,7 +60,7 @@ if (!page) {
 const { Content } = await render(page);
 ---
 
-<Layout>
+<Layout title={page.data.title}>
   <Prose>
     <Content />
   </Prose>
