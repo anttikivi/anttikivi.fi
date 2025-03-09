@@ -7,7 +7,12 @@ import Head from "@/components/Head.astro";
 import Link from "@/components/Link.astro";
 import contact from "@/contact";
 import { useTranslations } from "@/i18n";
-import { defaultLocale, languages, type Locale } from "@/locales";
+import {
+  defaultLocale,
+  languageCodes,
+  languages,
+  type Locale,
+} from "@/locales";
 import { getRoute, getRouteKey } from "@/routes";
 import "@/styles/global.css";
 import "@fontsource-variable/manrope";
@@ -24,12 +29,11 @@ const locale = Astro.currentLocale as Locale;
 const t = useTranslations("layout", locale);
 const siteTitle = useTranslations("site", locale)("title");
 const isIndex =
-  (Astro.currentLocale === defaultLocale && Astro.url.pathname === "/") ||
-  (Astro.currentLocale !== defaultLocale &&
-    Astro.url.pathname === `/${Astro.currentLocale}/`);
+  (locale === defaultLocale && Astro.url.pathname === "/") ||
+  (locale !== defaultLocale && Astro.url.pathname === `/${locale}/`);
 ---
 
-<html class="scheme-light dark:scheme-dark" lang={locale}>
+<html class="scheme-light dark:scheme-dark" lang={languageCodes[locale]}>
   <Head title={title} />
   <body
     class="bg-neutral-50 font-sans text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50"
@@ -58,7 +62,7 @@ const isIndex =
             languages
               .filter((lang) => lang.locale !== locale)
               .map((lang) => (
-                <li lang={lang.locale}>
+                <li lang={languageCodes[lang.locale]}>
                   <Link
                     class="text-peach-800 dark:text-peach-200"
                     href={getRouteKey(Astro.url.pathname)}

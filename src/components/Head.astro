@@ -3,7 +3,7 @@ import faviconColorSrc from "@/assets/favicon-color.png";
 import icoFaviconSrc from "@/assets/favicon.ico";
 import faviconSrc from "@/assets/favicon.svg";
 import { useTranslations } from "@/i18n";
-import locales, { defaultLocale, type Locale } from "@/locales";
+import locales, { defaultLocale, languageCodes, type Locale } from "@/locales";
 import { getRoute, getRouteKey } from "@/routes";
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
@@ -88,7 +88,7 @@ const opengraphImg = await getImage({
       <link
         rel="alternate"
         href={`${Astro.site?.origin}${getRoute(locale, getRouteKey(Astro.url.pathname))}`}
-        hreflang={locale}
+        hreflang={languageCodes[locale]}
       />
     ))
   }
@@ -125,4 +125,22 @@ const opengraphImg = await getImage({
     property="og:image:height"
     content={opengraphImg.options.height?.toString()}
   />
+  <meta
+    property="og:locale"
+    content={locale === "en"
+      ? "en_US"
+      : languageCodes[locale].replace("-", "_")}
+  />
+  {
+    locales
+      .filter((l) => l !== locale)
+      .map((locale) => (
+        <meta
+          property="og:locale:alternate"
+          content={
+            locale === "en" ? "en_US" : languageCodes[locale].replace("-", "_")
+          }
+        />
+      ))
+  }
 </head>
