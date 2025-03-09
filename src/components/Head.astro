@@ -1,7 +1,11 @@
 ---
+import faviconColorSrc from "@/assets/favicon-color.png";
+import icoFaviconSrc from "@/assets/favicon.ico";
+import faviconSrc from "@/assets/favicon.svg";
 import { useTranslations } from "@/i18n";
 import locales, { defaultLocale, type Locale } from "@/locales";
 import { getRoute, getRouteKey } from "@/routes";
+import { getImage } from "astro:assets";
 
 interface Props {
   description?: string;
@@ -9,13 +13,35 @@ interface Props {
 }
 
 const t = useTranslations("site", Astro.currentLocale as Locale);
-
 const { description = t("description"), title } = Astro.props;
-
 const isIndex =
   (Astro.currentLocale === defaultLocale && Astro.url.pathname === "/") ||
   (Astro.currentLocale !== defaultLocale &&
     Astro.url.pathname === `/${Astro.currentLocale}/`);
+const svgFavicon = await getImage({ format: "svg", src: faviconSrc });
+const icoFavicon = await getImage({
+  src: icoFaviconSrc,
+  width: 16,
+  height: 16,
+});
+const favicon32 = await getImage({
+  format: "png",
+  src: faviconColorSrc,
+  width: 32,
+  height: 32,
+});
+const favicon16 = await getImage({
+  format: "png",
+  src: faviconColorSrc,
+  width: 16,
+  height: 16,
+});
+const favicon180 = await getImage({
+  format: "png",
+  src: faviconColorSrc,
+  width: 180,
+  height: 180,
+});
 ---
 
 <head>
@@ -31,11 +57,15 @@ const isIndex =
       <title>{title} - {t("title")}</title>
     )
   }
-
   <meta name="description" content={description} />
 
-  <link href={`${Astro.site?.origin}${Astro.url.pathname}`} rel="canonical" />
+  <link href={svgFavicon.src} rel="icon" type="image/svg+xml" />
+  <link href={icoFavicon.src} rel="alternate icon" sizes="16x16" />
+  <link href={favicon32.src} rel="icon" sizes="32x32" type="image/png" />
+  <link href={favicon16.src} rel="icon" sizes="16x16" type="image/png" />
+  <link href={favicon180.src} rel="apple-touch-icon" sizes="180x180" />
 
+  <link href={`${Astro.site?.origin}${Astro.url.pathname}`} rel="canonical" />
   {
     locales.map((locale) => (
       <link
