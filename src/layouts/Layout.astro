@@ -7,7 +7,7 @@ import Head from "@/components/Head.astro";
 import Link from "@/components/Link.astro";
 import contact from "@/contact";
 import { useTranslations } from "@/i18n";
-import { languages, type Locale } from "@/locales";
+import { defaultLocale, languages, type Locale } from "@/locales";
 import { getRoute, getRouteKey } from "@/routes";
 import "@/styles/global.css";
 import "@fontsource-variable/manrope";
@@ -15,8 +15,12 @@ import "@fontsource-variable/red-hat-mono";
 import "@fontsource/libre-baskerville/400-italic.css";
 
 const locale = Astro.currentLocale as Locale;
-
 const t = useTranslations("layout", locale);
+const siteTitle = useTranslations("site", locale)("title");
+const isIndex =
+  (Astro.currentLocale === defaultLocale && Astro.url.pathname === "/") ||
+  (Astro.currentLocale !== defaultLocale &&
+    Astro.url.pathname === `/${Astro.currentLocale}/`);
 ---
 
 <html class="scheme-light dark:scheme-dark" lang={locale}>
@@ -27,6 +31,17 @@ const t = useTranslations("layout", locale);
     <a class="sr-only focus:not-sr-only" href={`#${t("mainID")}`}
       >{t("skipToContent")}</a
     >
+    <header class="container flex items-center justify-between py-10">
+      {
+        isIndex ? (
+          <h1 class="text-lg">{siteTitle}</h1>
+        ) : (
+          <Link class="text-lg !no-underline" href="/">
+            {siteTitle}
+          </Link>
+        )
+      }
+    </header>
     <main id={t("mainID")} class="container">
       <slot />
     </main>
@@ -39,6 +54,7 @@ const t = useTranslations("layout", locale);
               .map((lang) => (
                 <li lang={lang.locale}>
                   <Link
+                    class="text-peach-800 dark:text-peach-200"
                     href={getRouteKey(Astro.url.pathname)}
                     locale={lang.locale}
                   >
