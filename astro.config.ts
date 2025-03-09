@@ -1,3 +1,4 @@
+import sitemap from "@astrojs/sitemap";
 import tailwindcss from "@tailwindcss/vite";
 import type { Locales } from "astro";
 import { defineConfig } from "astro/config";
@@ -27,6 +28,7 @@ export default defineConfig({
   trailingSlash: "always",
   output: "static",
   compressHTML: import.meta.env.PROD,
+
   vite: {
     build: {
       cssMinify: "lightningcss",
@@ -40,10 +42,12 @@ export default defineConfig({
     },
     plugins: [tailwindcss()],
   },
+
   build: {
     format: "directory",
     assets: "_static",
   },
+
   markdown: {
     rehypePlugins: [
       [
@@ -81,6 +85,7 @@ export default defineConfig({
         : []),
     ],
   },
+
   i18n: {
     locales: locales as unknown as Locales,
     defaultLocale: defaultLocale as never,
@@ -88,9 +93,13 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+
   experimental: {
     svg: {
       mode: "inline",
     },
   },
+
+  integrations: [sitemap()],
 });
+
