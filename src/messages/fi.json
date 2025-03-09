@@ -2,7 +2,10 @@
   "layout": {
     "footer": {
       "languageMenuLabel": "Sivuston kieli",
-      "logoAlt": "Antti Kivi"
+      "logoAlt": "Antti Kivi",
+      "nav": {
+        "dataProtection": "Tietosuoja"
+      }
     },
     "mainID": "sisalto",
     "skipToContent": "Siirry sisältöön",

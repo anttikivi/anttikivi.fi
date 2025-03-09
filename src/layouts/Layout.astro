@@ -13,6 +13,7 @@ import {
   languages,
   type Locale,
 } from "@/locales";
+import { footerNav } from "@/nav";
 import { getRoute, getRouteKey } from "@/routes";
 import "@/styles/global.css";
 import "@fontsource-variable/manrope";
@@ -90,7 +91,7 @@ const isIndex =
           </a>
           <span>© 2025 Antti Kivi</span>
         </div>
-        <div>
+        <div class="sm:mr-2">
           <div class="flex flex-row justify-center gap-6 sm:justify-end">
             <a
               class="hover:text-peach-700 focus:text-peach-700 hover:dark:text-peach-400 focus:dark:text-peach-400"
@@ -117,6 +118,21 @@ const isIndex =
               <Github class="h-8 w-auto" />
             </a>
           </div>
+          <nav
+            class="my-6 flex flex-col justify-center text-center sm:mb-0 sm:text-right"
+          >
+            {
+              footerNav.map((link) => (
+                <Link
+                  class="text-peach-800 dark:text-peach-200"
+                  href={link.href}
+                  locale={locale}
+                >
+                  {t(link.label)}
+                </Link>
+              ))
+            }
+          </nav>
         </div>
       </div>
     </footer>

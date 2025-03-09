@@ -2,7 +2,10 @@
   "layout": {
     "footer": {
       "languageMenuLabel": "Site language",
-      "logoAlt": "Antti Kivi"
+      "logoAlt": "Antti Kivi",
+      "nav": {
+        "dataProtection": "Data protection"
+      }
     },
     "mainID": "main",
     "skipToContent": "Skip to main content",
