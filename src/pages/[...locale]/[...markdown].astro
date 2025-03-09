@@ -1,0 +1,67 @@
+---
+import Prose from "@/components/Prose.astro";
+import Layout from "@/layouts/Layout.astro";
+import locales, { defaultLocale, type Locale } from "@/locales";
+import routes from "@/routes";
+import type { GetStaticPaths, InferGetStaticPropsType } from "astro";
+import { getCollection, getEntry, render } from "astro:content";
+
+export const getStaticPaths = (async () => {
+  const pages = await getCollection("pages");
+  const paths = [];
+
+  for (const page of pages) {
+    const parts = page.id.split("/");
+
+    if (parts.length < 2) {
+      throw new Error(`invalid Markdown page id: ${page.id}`);
+    }
+
+    const locale = parts[0] as Locale;
+    const route = page.id.slice(`${locale}/`.length);
+
+    if (!locales.includes(parts[0] as Locale)) {
+      throw new Error(`Markdown page id does not contain locale: ${page.id}`);
+    }
+
+    if (locale === defaultLocale) {
+      paths.push({
+        params: {
+          locale: undefined,
+          markdown: routes[locale][route as keyof (typeof routes)[Locale]],
+        },
+        props: { route },
+      });
+    } else {
+      paths.push({
+        params: {
+          locale,
+          markdown: routes[locale][route as keyof (typeof routes)[Locale]],
+        },
+        props: { route },
+      });
+    }
+  }
+
+  return paths;
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { route } = Astro.props as Props;
+const locale = Astro.currentLocale as Locale;
+
+const page = await getEntry("pages", `${locale}/${route}`);
+
+if (!page) {
+  throw new Error(`could not load content for entry ${locale}/${route}`);
+}
+
+const { Content } = await render(page);
+---
+
+<Layout>
+  <Prose>
+    <Content />
+  </Prose>
+</Layout>
