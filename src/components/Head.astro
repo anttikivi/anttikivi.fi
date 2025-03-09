@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from "@/i18n";
-import { defaultLocale, type Locale } from "@/locales";
+import locales, { defaultLocale, type Locale } from "@/locales";
+import { getRoute, getRouteKey } from "@/routes";
 
 interface Props {
   description?: string;
@@ -32,6 +33,23 @@ const isIndex =
   }
 
   <meta name="description" content={description} />
+
+  <link href={`${Astro.site?.origin}${Astro.url.pathname}`} rel="canonical" />
+
+  {
+    locales.map((locale) => (
+      <link
+        rel="alternate"
+        href={`${Astro.site?.origin}${getRoute(locale, getRouteKey(Astro.url.pathname))}`}
+        hreflang={locale}
+      />
+    ))
+  }
+  <link
+    rel="alternate"
+    href={`${Astro.site?.origin}${getRoute("fi", getRouteKey(Astro.url.pathname))}`}
+    hreflang="x-default"
+  />
 
   <link rel="sitemap" href="/sitemap-index.xml" />
 </head>
