@@ -27,7 +27,12 @@ const t = useTranslations("layout", locale);
     <a class="sr-only focus:not-sr-only" href={`#${t("mainID")}`}
       >{t("skipToContent")}</a
     >
-    <main id={t("mainID")} class="container"><slot /></main>
+    <main
+      id={t("mainID")}
+      class="container [&_a]:underline [&_a]:hover:text-peach-700 [&_a]:hover:no-underline [&_a]:focus:text-peach-700 [&_a]:focus:no-underline dark:[&_a]:hover:text-peach-400 dark:[&_a]:focus:text-peach-400"
+    >
+      <slot />
+    </main>
     <footer class="container">
       <nav aria-label={t("footer.languageMenuLabel")}>
         <ul class="my-12 flex flex-col items-center md:my-8">
