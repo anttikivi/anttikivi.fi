@@ -7,21 +7,31 @@ import locales, { defaultLocale, languageCodes, type Locale } from "@/locales";
 import { getRoute, getRouteKey } from "@/routes";
 import "@/styles/global.css";
 import "@fontsource/libre-baskerville/400-italic.css";
+import libreBaskervilleWoff from "@fontsource/libre-baskerville/files/libre-baskerville-latin-400-italic.woff2";
 import "@fontsource/manrope";
 import manropeWoff from "@fontsource/manrope/files/manrope-latin-400-normal.woff2";
 import "@fontsource/red-hat-mono";
+import redHatMonoWoff from "@fontsource/red-hat-mono/files/red-hat-mono-latin-400-normal.woff2";
 import type { ImageMetadata } from "astro";
 import { getImage } from "astro:assets";
 
 interface Props {
   description?: string;
-  error?: boolean;
+  error?: boolean | undefined;
+  preloadMono?: boolean | undefined;
+  preloadSerif?: boolean | undefined;
   title?: string | undefined;
 }
 
 const locale = Astro.props.error ? "fi" : (Astro.currentLocale as Locale);
 const t = useTranslations("site", locale);
-const { description = t("description"), error, title } = Astro.props;
+const {
+  description = t("description"),
+  error,
+  preloadMono,
+  preloadSerif,
+  title,
+} = Astro.props;
 const isIndex =
   (locale === defaultLocale && Astro.url.pathname === "/") ||
   (locale !== defaultLocale && Astro.url.pathname === `/${locale}/`);
@@ -118,6 +128,28 @@ const opengraphImg = await getImage({
     href={manropeWoff}
     crossorigin="anonymous"
   />
+  {
+    preloadSerif && (
+      <link
+        rel="preload"
+        as="font"
+        type="font/woff2"
+        href={libreBaskervilleWoff}
+        crossorigin="anonymous"
+      />
+    )
+  }
+  {
+    preloadMono && (
+      <link
+        rel="preload"
+        as="font"
+        type="font/woff2"
+        href={redHatMonoWoff}
+        crossorigin="anonymous"
+      />
+    )
+  }
 
   <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={description} />

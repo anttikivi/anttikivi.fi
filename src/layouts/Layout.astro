@@ -18,10 +18,12 @@ import { getRoute, getRouteKey } from "@/routes";
 
 interface Props {
   error?: boolean;
+  preloadMono?: boolean;
+  preloadSerif?: boolean;
   title?: string;
 }
 
-const { error, title } = Astro.props;
+const { error, preloadMono, preloadSerif, title } = Astro.props;
 
 const locale = error ? "fi" : (Astro.currentLocale as Locale);
 const t = useTranslations("layout", locale);
@@ -32,7 +34,12 @@ const isIndex =
 ---
 
 <html class="scheme-light dark:scheme-dark" lang={languageCodes[locale]}>
-  <Head title={title} error />
+  <Head
+    error={error}
+    preloadMono={preloadMono}
+    preloadSerif={preloadSerif}
+    title={title}
+  />
   <body
     class="bg-neutral-50 font-sans text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50"
   >
