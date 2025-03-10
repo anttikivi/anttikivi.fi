@@ -1,0 +1,36 @@
+---
+import Prose from "@/components/Prose.astro";
+import Layout from "@/layouts/Layout.astro";
+import locales, { languageCodes, type Locale } from "@/locales";
+import { getEntry, render } from "astro:content";
+
+const entries = await Promise.all(
+  locales.map(async (locale) => await getEntry("errors", `${locale}/404`)),
+);
+
+for (const entry of entries) {
+  if (!entry) {
+    throw new (Error as any)("failed to get a error page entry");
+  }
+}
+---
+
+<Layout title="404" error>
+  <h1 class="my-10 font-mono text-2xl">404</h1>
+  <Prose class="mb-12">
+    {
+      entries.map(async (entry) => {
+        const { Content } = await render(entry!);
+        return (
+          <div
+            class="my-10 space-y-10 not-first:mt-14"
+            lang={languageCodes[entry!.id.split("/")[0] as Locale]}
+          >
+            <h2 class="text-lg">{entry!.data.title}</h2>
+            <Content />
+          </div>
+        );
+      })
+    }
+  </Prose>
+</Layout>

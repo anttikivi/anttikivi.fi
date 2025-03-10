@@ -21,12 +21,13 @@ import "@fontsource-variable/red-hat-mono";
 import "@fontsource/libre-baskerville/400-italic.css";
 
 interface Props {
+  error?: boolean;
   title?: string;
 }
 
-const { title } = Astro.props;
+const { error, title } = Astro.props;
 
-const locale = Astro.currentLocale as Locale;
+const locale = error ? "fi" : (Astro.currentLocale as Locale);
 const t = useTranslations("layout", locale);
 const siteTitle = useTranslations("site", locale)("title");
 const isIndex =
@@ -35,7 +36,7 @@ const isIndex =
 ---
 
 <html class="scheme-light dark:scheme-dark" lang={languageCodes[locale]}>
-  <Head title={title} />
+  <Head title={title} error />
   <body
     class="bg-neutral-50 font-sans text-neutral-900 dark:bg-neutral-900 dark:text-neutral-50"
   >
@@ -60,19 +61,20 @@ const isIndex =
       <nav aria-label={t("footer.languageMenuLabel")}>
         <ul class="my-12 flex flex-col items-center md:my-8">
           {
-            languages
-              .filter((lang) => lang.locale !== locale)
-              .map((lang) => (
-                <li lang={languageCodes[lang.locale]}>
-                  <Link
-                    class="text-peach-800 dark:text-peach-200"
-                    href={getRouteKey(Astro.url.pathname)}
-                    locale={lang.locale}
-                  >
-                    <bdi>{lang.menuLabel}</bdi>
-                  </Link>
-                </li>
-              ))
+            !error &&
+              languages
+                .filter((lang) => lang.locale !== locale)
+                .map((lang) => (
+                  <li lang={languageCodes[lang.locale]}>
+                    <Link
+                      class="text-peach-800 dark:text-peach-200"
+                      href={getRouteKey(Astro.url.pathname)}
+                      locale={lang.locale}
+                    >
+                      <bdi>{lang.menuLabel}</bdi>
+                    </Link>
+                  </li>
+                ))
           }
         </ul>
       </nav>

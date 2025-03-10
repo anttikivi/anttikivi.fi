@@ -10,12 +10,13 @@ import { getImage } from "astro:assets";
 
 interface Props {
   description?: string;
+  error?: boolean;
   title?: string | undefined;
 }
 
-const locale = Astro.currentLocale as Locale;
+const locale = Astro.props.error ? "fi" : (Astro.currentLocale as Locale);
 const t = useTranslations("site", locale);
-const { description = t("description"), title } = Astro.props;
+const { description = t("description"), error, title } = Astro.props;
 const isIndex =
   (locale === defaultLocale && Astro.url.pathname === "/") ||
   (locale !== defaultLocale && Astro.url.pathname === `/${locale}/`);
@@ -84,19 +85,24 @@ const opengraphImg = await getImage({
 
   <link href={canonicalURL} rel="canonical" />
   {
-    locales.map((locale) => (
+    !error &&
+      locales.map((locale) => (
+        <link
+          rel="alternate"
+          href={`${Astro.site?.origin}${getRoute(locale, getRouteKey(Astro.url.pathname))}`}
+          hreflang={languageCodes[locale]}
+        />
+      ))
+  }
+  {
+    !error && (
       <link
         rel="alternate"
-        href={`${Astro.site?.origin}${getRoute(locale, getRouteKey(Astro.url.pathname))}`}
-        hreflang={languageCodes[locale]}
+        href={`${Astro.site?.origin}${getRoute("fi", getRouteKey(Astro.url.pathname))}`}
+        hreflang="x-default"
       />
-    ))
+    )
   }
-  <link
-    rel="alternate"
-    href={`${Astro.site?.origin}${getRoute("fi", getRouteKey(Astro.url.pathname))}`}
-    hreflang="x-default"
-  />
 
   <link rel="sitemap" href="/sitemap-index.xml" />
 
@@ -125,22 +131,29 @@ const opengraphImg = await getImage({
     property="og:image:height"
     content={opengraphImg.options.height?.toString()}
   />
-  <meta
-    property="og:locale"
-    content={locale === "en"
-      ? "en_US"
-      : languageCodes[locale].replace("-", "_")}
-  />
   {
-    locales
-      .filter((l) => l !== locale)
-      .map((locale) => (
-        <meta
-          property="og:locale:alternate"
-          content={
-            locale === "en" ? "en_US" : languageCodes[locale].replace("-", "_")
-          }
-        />
-      ))
+    !error && (
+      <meta
+        property="og:locale"
+        content={
+          locale === "en" ? "en_US" : languageCodes[locale].replace("-", "_")
+        }
+      />
+    )
+  }
+  {
+    !error &&
+      locales
+        .filter((l) => l !== locale)
+        .map((locale) => (
+          <meta
+            property="og:locale:alternate"
+            content={
+              locale === "en"
+                ? "en_US"
+                : languageCodes[locale].replace("-", "_")
+            }
+          />
+        ))
   }
 </head>
