@@ -16,14 +16,14 @@ for (const entry of entries) {
 ---
 
 <Layout title="404" error preloadMono>
-  <h1 class="my-10 font-mono text-2xl">404</h1>
+  <h1 class="my-8 font-mono text-2xl">404</h1>
   <Prose class="mb-12">
     {
       entries.map(async (entry) => {
         const { Content } = await render(entry!);
         return (
           <div
-            class="my-10 space-y-10 not-first:mt-14"
+            class="my-8 space-y-8 not-first:mt-12"
             lang={languageCodes[entry!.id.split("/")[0] as Locale]}
           >
             <h2 class="text-lg">{entry!.data.title}</h2>
