@@ -30,17 +30,19 @@ export default defineConfig({
   compressHTML: import.meta.env.PROD,
 
   vite: {
-    build: {
-      cssMinify: "lightningcss",
-    },
+    plugins: [tailwindcss()],
     css: {
       transformer: "lightningcss",
       lightningcss: {
         include: Features.Colors | Features.Nesting,
-        targets: browserslistToTargets(browserslist(">= 0.005% and not dead")),
+        targets: browserslistToTargets(
+          browserslist(">= 0.045%, last 2 versions, Firefox ESR, not dead"),
+        ),
       },
     },
-    plugins: [tailwindcss()],
+    build: {
+      cssMinify: "lightningcss",
+    },
   },
 
   build: {
@@ -95,9 +97,7 @@ export default defineConfig({
   },
 
   experimental: {
-    svg: {
-      mode: "inline",
-    },
+    svg: true,
   },
 
   integrations: [sitemap()],
