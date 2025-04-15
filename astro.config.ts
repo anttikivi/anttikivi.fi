@@ -4,7 +4,7 @@ import type { Locales } from "astro";
 import { defineConfig } from "astro/config";
 import browserslist from "browserslist";
 import type { Element, Root, RootContent } from "hast";
-import { browserslistToTargets, Features } from "lightningcss";
+import { browserslistToTargets } from "lightningcss";
 import rehypeAttr from "rehype-attr";
 import rehypeExternalLinks from "rehype-external-links";
 import rehypeMinifyWhitespace from "rehype-minify-whitespace";
@@ -34,7 +34,7 @@ export default defineConfig({
     css: {
       transformer: "lightningcss",
       lightningcss: {
-        include: Features.Colors | Features.Nesting,
+        // include: Features.Colors | Features.Nesting,
         targets: browserslistToTargets(
           browserslist(">= 0.045%, last 2 versions, Firefox ESR, not dead"),
         ),
