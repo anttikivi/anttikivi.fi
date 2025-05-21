@@ -15,7 +15,7 @@ jobs:
       !startsWith(github.event.head_commit.message, 'docs')"
     strategy:
       matrix:
-        node: ["20", "22"]
+        node: ["20", "22", "24"]
 
     steps:
       - name: Check out the repository
@@ -40,7 +40,7 @@ jobs:
       !startsWith(github.event.head_commit.message, 'docs')"
     strategy:
       matrix:
-        node: ["20", "22"]
+        node: ["20", "22", "24"]
 
     steps:
       - name: Check out the repository
