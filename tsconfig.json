@@ -11,5 +11,11 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": ["${configDir}/dist"],
+  "include": [
+    "${configDir}/.astro/types.d.ts",
+    "${configDir}/**/*",
+    "./src/pages/.well-known/*"
+  ]
 }
