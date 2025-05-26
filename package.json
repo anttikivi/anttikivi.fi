@@ -22,7 +22,7 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@fontsource/libre-baskerville": "5.2.5",
+    "@fontsource/libre-baskerville": "5.2.6",
     "@fontsource/manrope": "5.2.5",
     "@fontsource/red-hat-mono": "5.2.5",
     "astro": "5.7.13"
